@@ -1,5 +1,6 @@
 import 'package:cinema_app/screens/home_page.dart';
 import 'package:cinema_app/screens/movie_details.dart';
+import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
@@ -14,6 +15,9 @@ class Main extends StatelessWidget {
     return MaterialApp(
       title: 'Cinema App',
       initialRoute: 'Home',
+      theme: ThemeData(
+        primaryColor: hexToColor('#4947a7'),
+      ),
       routes: {
         'Home': (context) => HomePage(),
         'MovieDetails': (context) => MovieDetails()
