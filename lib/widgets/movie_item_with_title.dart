@@ -1,13 +1,16 @@
 import 'package:cinema_app/models/Movie.dart';
+import 'package:cinema_app/models/genres.dart';
 import 'package:flutter/material.dart';
 
 class MovieItemWithTitle extends StatelessWidget {
   const MovieItemWithTitle({
     Key key,
     @required this.movieItem,
+    @required this.genresList,
   }) : super(key: key);
 
   final Movie movieItem;
+  final List<Genres> genresList;
 
   @override
   Widget build(BuildContext context) {
@@ -45,50 +48,64 @@ class MovieItemWithTitle extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      Text(
-                        movieItem.title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: theme.textTheme.title.copyWith(
-                          color: Colors.white,
-                          fontSize: fontSize,
-                        ),
+                  Expanded(
+                    flex: 2,
+                    child: SingleChildScrollView(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        direction: Axis.horizontal,
+                        children: <Widget>[
+                          Text(
+                            movieItem.title,
+                            style: theme.textTheme.title.copyWith(
+                              color: Colors.white,
+                              fontSize: fontSize,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(${movieItem.releaseDate.split('-')[0]})',
+                            style: theme.textTheme.subtitle.copyWith(
+                              color: Colors.white60,
+                              fontSize: fontSize * 0.8,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '(${movieItem.releaseDate.split('-')[0]})',
-                        style: theme.textTheme.subtitle.copyWith(
-                          color: Colors.white60,
-                          fontSize: fontSize,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    '(${movieItem.voteAverage})',
-                    style: theme.textTheme.subtitle.copyWith(
-                      color: Colors.white60,
-                      fontSize: fontSize,
-                    ),
+                  Expanded(
+                    child: ListView.separated(
+                        separatorBuilder: (context, i) => SizedBox(
+                              width: 10,
+                            ),
+                        itemCount: movieItem.genreIds.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, i) => Theme(
+                              data: ThemeData(canvasColor: Colors.transparent),
+                              child: Chip(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
+                                backgroundColor: Colors.white24,
+                                label: Text(
+                                  genresList
+                                      .firstWhere((item) =>
+                                          item.id == movieItem.genreIds[i])
+                                      .name,
+                                  style: theme.chipTheme.labelStyle.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            )),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Chip(
-                        label: Text(
-                          movieItem.genreIds[0].toString(),
-                        ),
-                      )
-                    ],
-                  )
                 ],
               ),
             ),

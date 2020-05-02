@@ -1,4 +1,5 @@
 import 'package:cinema_app/models/PopularMoviesList.dart';
+import 'package:cinema_app/models/genres.dart';
 import 'package:dio/dio.dart';
 
 class MoviesApi {
@@ -17,6 +18,25 @@ class MoviesApi {
         ),
       );
       return PopularMoviesList.fromJson(response.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<GenresList> getGenresList({String language = 'en-US'}) async {
+    try {
+      Response response = await dio.get(
+        'https://api.themoviedb.org/3/genre/movie/list',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer ${MoviesApi.API_KEY}',
+          },
+        ),
+        queryParameters: {
+          "language": language,
+        },
+      );
+      return GenresList.fromJson(response.data);
     } catch (error) {
       throw error;
     }

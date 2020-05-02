@@ -1,7 +1,10 @@
 import 'package:cinema_app/models/Movie.dart';
+import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/widgets/header.dart';
 import 'package:cinema_app/widgets/movie_item_with_title.dart';
+import 'package:cinema_app/widgets/movie_list_horizontal.dart';
+import 'package:cinema_app/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Movie> moviesList = [];
+  List<Genres> genresList = [];
 
   @override
   void initState() {
@@ -18,10 +22,16 @@ class _HomePageState extends State<HomePage> {
     api.getPopularMovies().then(
       (data) {
         setState(() {
-          moviesList = data.results;
+          moviesList =
+              data.results.where((item) => item.backdropPath != null).toList();
         });
       },
     );
+    api.getGenresList().then((data) {
+      setState(() {
+        genresList = data.genres;
+      });
+    });
   }
 
   @override
@@ -54,33 +64,13 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    'Trendings',
-                    style: theme.textTheme.title.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
+                  SectionTitle(),
                   SizedBox(
                     height: 25,
                   ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints.expand(
-                      height: MediaQuery.of(context).size.width * 0.45,
-                    ),
-                    child: ListView.separated(
-                      separatorBuilder: (context, i) {
-                        return SizedBox(
-                          width: 20,
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: moviesList.length,
-                      itemBuilder: (context, i) {
-                        return MovieItemWithTitle(
-                          movieItem: moviesList[i],
-                        );
-                      },
-                    ),
+                  MovieListHorizontal(
+                    moviesList: moviesList,
+                    genresList: genresList,
                   )
                 ],
               ),
