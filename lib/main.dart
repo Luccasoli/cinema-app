@@ -17,6 +17,7 @@ class Main extends StatelessWidget {
       initialRoute: 'Home',
       theme: ThemeData(
         primaryColor: hexToColor('#4947a7'),
+        accentColor: hexToColor('#483785'),
       ),
       routes: {
         'Home': (context) => HomePage(),

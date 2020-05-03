@@ -1,4 +1,4 @@
-import 'package:cinema_app/models/Movie.dart';
+import 'movie.dart';
 
 class PopularMoviesList {
   int page;

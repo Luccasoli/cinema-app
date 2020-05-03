@@ -1,5 +1,6 @@
-import 'package:cinema_app/models/PopularMoviesList.dart';
 import 'package:cinema_app/models/genres.dart';
+import 'package:cinema_app/models/now_playing_movies_list.dart';
+import 'package:cinema_app/models/popular_movies_list.dart';
 import 'package:dio/dio.dart';
 
 class MoviesApi {
@@ -23,7 +24,9 @@ class MoviesApi {
     }
   }
 
-  Future<GenresList> getGenresList({String language = 'en-US'}) async {
+  Future<GenresList> getGenresList({
+    String language = 'en-US',
+  }) async {
     try {
       Response response = await dio.get(
         'https://api.themoviedb.org/3/genre/movie/list',
@@ -37,6 +40,31 @@ class MoviesApi {
         },
       );
       return GenresList.fromJson(response.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<NowPlayingMoviesList> getNowPlayingList({
+    String language = 'en-US',
+    int page = 1,
+    String region = '',
+  }) async {
+    try {
+      Response response = await dio.get(
+        'https://api.themoviedb.org/3/movie/now_playing',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer ${MoviesApi.API_KEY}',
+          },
+        ),
+        queryParameters: {
+          "language": language,
+          "page": page,
+          "region": region,
+        },
+      );
+      return NowPlayingMoviesList.fromJson(response.data);
     } catch (error) {
       throw error;
     }

@@ -1,5 +1,5 @@
-import 'package:cinema_app/models/Movie.dart';
 import 'package:cinema_app/models/genres.dart';
+import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieItemWithTitle extends StatelessWidget {
