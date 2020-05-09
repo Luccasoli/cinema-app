@@ -134,67 +134,81 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Header(),
                 Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.all(0),
-                    controller: _controller1,
-                    children: <Widget>[
-                      SectionTitle(
-                        title: 'Trendings',
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      MoviesListHorizontal(
-                        popularMoviesList: popularMoviesList,
-                        genresList: genresList,
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          SectionTitle(
-                            title: 'Category',
-                            color: theme.accentColor,
-                          ),
-                          OutlineButton(
-                            onPressed: () {},
-                            child: Text(
-                              'See more',
-                              style: theme.textTheme.caption.copyWith(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black38,
-                              ),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            SectionTitle(
+                              title: 'Trendings',
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
+                            SizedBox(
+                              height: 25,
                             ),
-                          )
-                        ],
-                      ),
-                      GenresListHorizontal(genresList: genresList),
-                      SectionTitle(
-                        title: 'Recents',
-                        color: theme.accentColor,
-                      ),
-                      SizedBox(
-                        height: screenSize.height - 140,
-                        child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: screenSize.width / 2,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1 / 2,
-                          ),
-                          itemCount: popularMoviesList.length,
-                          itemBuilder: (context, index) {
-                            return RecentMovieItem(popularMoviesList[index]);
-                          },
+                            MoviesListHorizontal(
+                              popularMoviesList: popularMoviesList,
+                              genresList: genresList,
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                SectionTitle(
+                                  title: 'Category',
+                                  color: theme.accentColor,
+                                ),
+                                OutlineButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'See more',
+                                    style: theme.textTheme.caption.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black38,
+                                    ),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                  ),
+                                )
+                              ],
+                            ),
+                            GenresListHorizontal(genresList: genresList),
+                          ],
                         ),
                       ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 50.0,
+                          maxHeight: 50.0,
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            color: Colors.white,
+                            child: SectionTitle(
+                              title: 'Recents',
+                              color: theme.accentColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            return RecentMovieItem(popularMoviesList[index]);
+                          },
+                          childCount: popularMoviesList.length,
+                        ),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: screenSize.width / 2,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 1 / 2,
+                        ),
+                      )
                     ],
+                    controller: _controller1,
                   ),
                 ),
               ],
@@ -205,3 +219,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// SizedBox(
+//                         height: screenSize.height - 140,
+//                         child: GridView.builder(
+//                           physics: const NeverScrollableScrollPhysics(),
+//                           gridDelegate:
+//                               SliverGridDelegateWithMaxCrossAxisExtent(
+//                             maxCrossAxisExtent: screenSize.width / 2,
+//                             crossAxisSpacing: 10,
+//                             childAspectRatio: 1 / 2,
+//                           ),
+//                           itemCount: popularMoviesList.length,
+//                           itemBuilder: (context, index) {
+//                             return RecentMovieItem(popularMoviesList[index]);
+//                           },
+//                         ),
+//                       ),
