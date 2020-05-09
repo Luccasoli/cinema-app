@@ -17,7 +17,7 @@ class MovieItemWithTitle extends StatelessWidget {
     final fontSize = MediaQuery.of(context).size.width * 0.05;
     final theme = Theme.of(context);
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(25),
       child: Stack(
         children: [
           Image.network(

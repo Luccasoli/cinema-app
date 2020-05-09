@@ -8,20 +8,26 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        Expanded(
-          child: SearchBar(),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top + 10,
+        bottom: 16.4,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: SearchBar(),
+          ),
+        ],
+      ),
     );
   }
 }
