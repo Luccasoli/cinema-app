@@ -11,6 +11,34 @@ import 'package:cinema_app/widgets/movies_list_horizontal.dart';
 import 'package:cinema_app/widgets/recents_movie_item.dart';
 import 'package:cinema_app/widgets/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:linked_scroll_controller/linked_scroll_controller.dart';
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    @required this.minHeight,
+    @required this.maxHeight,
+    @required this.child,
+  });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+  @override
+  double get minExtent => minHeight;
+  @override
+  double get maxExtent => max(maxHeight, minHeight);
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
+  }
+}
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,16 +51,16 @@ class _HomePageState extends State<HomePage> {
   List<Movie> nowPlayingMoviesList = [];
 
   double height = 230;
-  ScrollController _controller = ScrollController(initialScrollOffset: 200);
+  ScrollController _controller1;
+  ScrollController _controller2;
+  LinkedScrollControllerGroup _controllers;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      setState(() {
-        height = max(0, 230 - _controller.offset);
-      });
-    });
+    _controllers = LinkedScrollControllerGroup();
+    _controller1 = _controllers.addAndGet();
+    _controller2 = _controllers.addAndGet();
 
     Future.wait([
       api.getPopularMovies(),
@@ -63,18 +91,38 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          ConstrainedBox(
-            constraints: BoxConstraints(minHeight: 100),
-            child: Container(
-              height: height,
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
+          CustomScrollView(
+            controller: _controller2,
+            slivers: <Widget>[
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  minHeight: 100.0,
+                  maxHeight: 200.0,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: 100),
+                    child: Container(
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: theme.primaryColor,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SliverFixedExtentList(
+                itemExtent: screenSize.height,
+                delegate: SliverChildListDelegate(
+                  [
+                    Container(color: Colors.transparent),
+                  ],
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -88,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: ListView(
                     padding: EdgeInsets.all(0),
-                    controller: _controller,
+                    controller: _controller1,
                     children: <Widget>[
                       SectionTitle(
                         title: 'Trendings',
