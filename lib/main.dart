@@ -12,12 +12,23 @@ void main(List<String> args) {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final primaryColor = hexToColor('#4947a7');
+    final accentColor = hexToColor('#483785');
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Cinema App',
       initialRoute: 'Home',
       theme: ThemeData(
-        primaryColor: hexToColor('#4947a7'),
-        accentColor: hexToColor('#483785'),
+        primaryColor: primaryColor,
+        accentColor: accentColor,
+        textTheme: ThemeData().textTheme.copyWith(
+              headline6:
+                  ThemeData().textTheme.headline6.copyWith(color: accentColor),
+              bodyText1:
+                  ThemeData().textTheme.bodyText1.copyWith(color: accentColor),
+              bodyText2:
+                  ThemeData().textTheme.bodyText2.copyWith(color: accentColor),
+            ),
       ),
       routes: {
         'Home': (context) => HomePage(),
