@@ -1,36 +1,22 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
-class CastSection extends StatefulWidget {
+class CastSection extends StatelessWidget {
   const CastSection({
     Key key,
     @required this.movie,
+    @required this.castList,
+    @required this.director,
+    @required this.writers,
   }) : super(key: key);
 
   final Movie movie;
-
-  @override
-  _CastSectionState createState() => _CastSectionState();
-}
-
-class _CastSectionState extends State<CastSection> {
-  CastList castList;
-
-  @override
-  void initState() {
-    super.initState();
-    api.getCast(widget.movie.id).then(
-          (value) => {
-            setState(() {
-              castList = value;
-            })
-          },
-        );
-  }
+  final CastList castList;
+  final Crew director;
+  final List<Crew> writers;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,4 @@
-import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/services/api.dart';
 import 'package:flutter/material.dart';
 
 class HeaderMovieDetails extends StatefulWidget {

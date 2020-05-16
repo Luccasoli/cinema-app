@@ -2,7 +2,14 @@ import 'package:cinema_app/screens/home_page.dart';
 import 'package:cinema_app/screens/movie_details.dart';
 import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+
+class Route {
+  static Map<String, GetRoute> namedRoutes = {
+    '/': GetRoute(page: HomePage()),
+    '/MovieDetails': GetRoute(page: MovieDetails()),
+  };
+}
 
 void main(List<String> args) {
   runApp(
@@ -15,10 +22,11 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = hexToColor('#4947a7');
     final accentColor = hexToColor('#483785');
-    return MaterialApp(
+    return GetMaterialApp(
+      initialRoute: '/',
+      namedRoutes: Route.namedRoutes,
       debugShowCheckedModeBanner: false,
       title: 'Cinema App',
-      initialRoute: 'Home',
       theme: ThemeData(
         primaryColor: primaryColor,
         accentColor: accentColor,
@@ -31,10 +39,6 @@ class Main extends StatelessWidget {
                   ThemeData().textTheme.bodyText2.copyWith(color: accentColor),
             ),
       ),
-      routes: {
-        'Home': (context) => HomePage(),
-        'MovieDetails': (context) => MovieDetails()
-      },
     );
   }
 }
