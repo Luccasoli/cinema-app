@@ -1,27 +1,14 @@
+import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 
-class MovieDetails extends StatefulWidget {
-  _MovieDetailsState createState() => _MovieDetailsState();
-}
-
-class _MovieDetailsState extends State<MovieDetails> {
-  dynamic posterPath = '';
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      // posterPath = Navigator.of(context).set['image'];
-    });
-  }
-
+class MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Hero(
-        tag: 'image',
-        child: Image.network(posterPath),
-      ),
-    );
+    Movie movie = ModalRoute.of(context).settings.arguments;
+
+    return Hero(
+        tag: movie.title,
+        child: Image.network(
+            'https://image.tmdb.org/t/p/w500/${movie.backdropPath}'));
   }
 }

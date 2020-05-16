@@ -1,6 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class RecentMovieItem extends StatelessWidget {
   final Movie movie;
@@ -14,8 +14,14 @@ class RecentMovieItem extends StatelessWidget {
       children: <Widget>[
         ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: Image.network(
-            'https://image.tmdb.org/t/p/w500/${movie.posterPath}',
+          child: InkWell(
+            borderRadius: BorderRadius.circular(25),
+            onTap: () {
+              Navigator.of(context).pushNamed('MovieDetails', arguments: movie);
+            },
+            child: Image.network(
+              'https://image.tmdb.org/t/p/w500/${movie.posterPath}',
+            ),
           ),
         ),
         SizedBox(
