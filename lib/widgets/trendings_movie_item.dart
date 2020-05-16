@@ -2,8 +2,8 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 
-class MovieItemWithTitle extends StatelessWidget {
-  const MovieItemWithTitle({
+class TrendingsMovieItem extends StatelessWidget {
+  const TrendingsMovieItem({
     Key key,
     @required this.movieItem,
     @required this.genresList,
