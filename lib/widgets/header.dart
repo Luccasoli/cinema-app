@@ -1,4 +1,5 @@
 import 'package:cinema_app/screens/search_bar.dart';
+import 'package:cinema_app/widgets/status_bar.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -8,26 +9,31 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 10,
-        bottom: 16.4,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+    return Column(
+      children: <Widget>[
+        StatusBar(),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            bottom: 16.4,
           ),
-          SizedBox(
-            width: 20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: SearchBar(),
+              ),
+            ],
           ),
-          Expanded(
-            child: SearchBar(),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

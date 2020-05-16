@@ -5,6 +5,7 @@ import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
 import 'package:cinema_app/services/api.dart';
+import 'package:cinema_app/widgets/default_padding.dart';
 import 'package:cinema_app/widgets/genres_list_horizontal.dart';
 import 'package:cinema_app/widgets/header.dart';
 import 'package:cinema_app/widgets/movies_list_horizontal.dart';
@@ -124,11 +125,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-            ),
+          DefaultPadding(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
