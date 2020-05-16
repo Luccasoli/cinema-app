@@ -30,7 +30,9 @@ class MovieDetails extends StatelessWidget {
                     StorylineSection(
                       movie: movie,
                     ),
-                    CastSection()
+                    CastSection(
+                      movie: movie,
+                    )
                   ],
                 ),
               ),

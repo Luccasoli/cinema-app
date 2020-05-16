@@ -26,8 +26,11 @@ class TrendingsMovieItem extends StatelessWidget {
           children: [
             Hero(
               tag: movieItem.title,
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w500/${movieItem.backdropPath}',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w500/${movieItem.backdropPath}',
+                ),
               ),
             ),
             Positioned.fill(

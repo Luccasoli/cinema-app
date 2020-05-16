@@ -1,11 +1,40 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cinema_app/models/cast.dart';
+import 'package:cinema_app/models/movie.dart';
+import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
-class CastSection extends StatelessWidget {
+class CastSection extends StatefulWidget {
+  const CastSection({
+    Key key,
+    @required this.movie,
+  }) : super(key: key);
+
+  final Movie movie;
+
+  @override
+  _CastSectionState createState() => _CastSectionState();
+}
+
+class _CastSectionState extends State<CastSection> {
+  CastList castList;
+
+  @override
+  void initState() {
+    super.initState();
+    api.getCast(widget.movie.id).then(
+          (value) => {
+            setState(() {
+              castList = value;
+            })
+          },
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final list = List.filled(100, '0');
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -19,34 +48,47 @@ class CastSection extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: 100,
+            height: 170,
             child: ListView.separated(
               separatorBuilder: (context, index) => SizedBox(
                 width: 10,
               ),
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, i) => Column(
-                children: <Widget>[
-                  Container(
-                    height: 50,
-                    width: 50,
-                    color: Colors.pink,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text('Nome do ator'),
-                        Text(
-                          'Papel',
-                          style: theme.textTheme.caption,
-                        ),
-                      ],
+              itemBuilder: (context, i) => ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 80,
+                  minWidth: 80,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      'https://image.tmdb.org/t/p/w500/${castList.cast[i].profilePath}',
+                      height: 80,
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Column(
+                        children: <Widget>[
+                          AutoSizeText(
+                            castList.cast[i].name,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          AutoSizeText(
+                            castList.cast[i].character,
+                            style: theme.textTheme.caption,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              itemCount: list.length,
+              itemCount: castList.cast.length,
             ),
           )
         ],
