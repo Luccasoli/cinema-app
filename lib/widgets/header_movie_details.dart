@@ -11,10 +11,18 @@ class HeaderMovieDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Hero(
       tag: movie.title,
-      child: Image.network(
-        'https://image.tmdb.org/t/p/w500/${movie.backdropPath}',
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: size.height * 0.4,
+          minWidth: size.width,
+        ),
+        child: Image.network(
+          'https://image.tmdb.org/t/p/w500/${movie.backdropPath}',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

@@ -18,14 +18,18 @@ class MovieDetails extends StatelessWidget {
         children: <Widget>[
           StatusBar(),
           HeaderMovieDetails(movie: movie),
-          DefaultPadding(
-            child: Expanded(
-              child: SingleChildScrollView(
+          Expanded(
+            child: SingleChildScrollView(
+              child: DefaultPadding(
                 child: Column(
                   children: <Widget>[
                     Reviews(),
-                    FilmmakingDetails(),
-                    StorylineSection(),
+                    FilmmakingDetails(
+                      movie: movie,
+                    ),
+                    StorylineSection(
+                      movie: movie,
+                    ),
                     CastSection()
                   ],
                 ),

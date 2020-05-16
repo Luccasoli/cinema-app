@@ -2,6 +2,7 @@ import 'package:cinema_app/screens/home_page.dart';
 import 'package:cinema_app/screens/movie_details.dart';
 import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main(List<String> args) {
   runApp(
