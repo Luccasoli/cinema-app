@@ -183,6 +183,7 @@ class _HomePageState extends State<HomePage> {
                           maxHeight: 50.0,
                           child: Container(
                             alignment: Alignment.centerLeft,
+                            color: theme.scaffoldBackgroundColor,
                             child: SectionTitle(
                               title: 'Recents',
                               color: theme.accentColor,
@@ -215,20 +216,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// SizedBox(
-//                         height: screenSize.height - 140,
-//                         child: GridView.builder(
-//                           physics: const NeverScrollableScrollPhysics(),
-//                           gridDelegate:
-//                               SliverGridDelegateWithMaxCrossAxisExtent(
-//                             maxCrossAxisExtent: screenSize.width / 2,
-//                             crossAxisSpacing: 10,
-//                             childAspectRatio: 1 / 2,
-//                           ),
-//                           itemCount: popularMoviesList.length,
-//                           itemBuilder: (context, index) {
-//                             return RecentMovieItem(popularMoviesList[index]);
-//                           },
-//                         ),
-//                       ),
