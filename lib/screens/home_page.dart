@@ -183,7 +183,6 @@ class _HomePageState extends State<HomePage> {
                           maxHeight: 50.0,
                           child: Container(
                             alignment: Alignment.centerLeft,
-                            color: Colors.white,
                             child: SectionTitle(
                               title: 'Recents',
                               color: theme.accentColor,
