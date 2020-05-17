@@ -51,6 +51,7 @@ class _MovieDetailsState extends State<MovieDetails> {
           HeaderMovieDetails(movie: movie),
           Expanded(
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: DefaultPadding(
                 child: Column(
                   children: <Widget>[

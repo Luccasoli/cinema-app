@@ -4,10 +4,10 @@ import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Route {
+class Routes {
   static Map<String, GetRoute> namedRoutes = {
-    '/': GetRoute(page: HomePage()),
-    '/MovieDetails': GetRoute(page: MovieDetails()),
+    RoutesPath.Home: GetRoute(page: HomePage()),
+    RoutesPath.MovieDetails: GetRoute(page: MovieDetails()),
   };
 }
 
@@ -23,8 +23,8 @@ class Main extends StatelessWidget {
     final primaryColor = hexToColor('#4947a7');
     final accentColor = hexToColor('#483785');
     return GetMaterialApp(
-      initialRoute: '/',
-      namedRoutes: Route.namedRoutes,
+      initialRoute: RoutesPath.Home,
+      namedRoutes: Routes.namedRoutes,
       debugShowCheckedModeBanner: false,
       title: 'Cinema App',
       theme: ThemeData(

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/movie.dart';
+import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +19,7 @@ class RecentMovieItem extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(25),
             onTap: () {
-              // Navigator.of(context).pushNamed('MovieDetails', arguments: movie);
-              Get.toNamed('/MovieDetails', arguments: movie);
+              Get.toNamed(RoutesPath.MovieDetails, arguments: movie);
             },
             child: Image.network(
               'https://image.tmdb.org/t/p/w500/${movie.posterPath}',

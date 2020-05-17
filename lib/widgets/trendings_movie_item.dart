@@ -1,5 +1,6 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
+import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,8 +20,7 @@ class TrendingsMovieItem extends StatelessWidget {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
-        // Navigator.of(context).pushNamed('MovieDetails', arguments: movieItem);
-        Get.toNamed('/MovieDetails', arguments: movieItem);
+        Get.toNamed(RoutesPath.MovieDetails, arguments: movieItem);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
