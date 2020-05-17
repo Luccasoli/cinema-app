@@ -17,32 +17,33 @@ class MovieDetails extends StatefulWidget {
 }
 
 class _MovieDetailsState extends State<MovieDetails> {
-  CastList castList;
-  Crew director;
-  List<Crew> writers;
+  Future<CastList> castList;
+  Future<Crew> director;
+  Future<List<Crew>> writers;
   Movie movie;
 
   @override
   void initState() {
     super.initState();
-    Movie movie = Get.arguments as Movie;
+    print('initState');
+    movie = Get.arguments;
     api.getCast(movie.id).then(
-          (value) => {
-            setState(() {
-              castList = value;
-              director = value.crew
-                  .where((crew) => crew.job == 'Director')
-                  .toList()[0];
-              writers = value.crew
-                  .where((crew) => crew.department == 'Writing')
-                  .toList();
-            })
-          },
-        );
+      (value) {
+        setState(() {
+          castList = Future.value(value);
+          director = Future.value(
+              value.crew.where((crew) => crew.job == 'Director').toList()[0]);
+          writers = Future.value(value.crew
+              .where((crew) => crew.department == 'Writing')
+              .toList());
+        });
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    print(movie);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -55,6 +56,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                   children: <Widget>[
                     Reviews(),
                     FilmmakingDetails(
+                      director: director,
+                      writers: writers,
                       movie: movie,
                     ),
                     StorylineSection(
@@ -63,9 +66,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     CastSection(
                       movie: movie,
                       castList: castList,
-                      director: director,
-                      writers: writers,
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -26,7 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   linked_scroll_controller: ^0.1.2
   intl: ^0.16.1
-  get: ^2.5.3
+  get: ^2.5.5
 
 dev_dependencies:
   flutter_test:

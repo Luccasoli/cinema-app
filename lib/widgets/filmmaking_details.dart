@@ -1,3 +1,4 @@
+import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,10 +9,15 @@ class FilmmakingDetails extends StatelessWidget {
 
   FilmmakingDetails({
     Key key,
+    @required this.director,
+    @required this.writers,
     @required this.movie,
   }) : super(key: key) {
     initializeDateFormatting('en_US', null);
   }
+
+  final Future<Crew> director;
+  final Future<List<Crew>> writers;
 
   @override
   Widget build(BuildContext context) {
@@ -42,34 +48,54 @@ class FilmmakingDetails extends StatelessWidget {
                       ),
                     ]),
                   ),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Director: ',
-                        style: theme.bodyText2,
-                      ),
-                      TextSpan(
-                        text: 'Dean Deblois',
-                        style: theme.bodyText1,
-                      ),
-                    ]),
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Writers: ',
-                        style: theme.bodyText2,
-                      ),
-                      TextSpan(
-                        text: 'Dean Deblois ',
-                        style: theme.bodyText1,
-                      ),
-                      TextSpan(
-                        text: '(based upon the "How to Train Your Dragon")',
-                        style: theme.bodyText2,
-                      ),
-                    ]),
-                  ),
+                  FutureBuilder<Crew>(
+                      future: director,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return Text(
+                            'Carregando...',
+                            style: theme.bodyText1,
+                          );
+                        return RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: 'Director: ',
+                              style: theme.bodyText2,
+                            ),
+                            TextSpan(
+                              text: snapshot.data.name,
+                              style: theme.bodyText1,
+                            ),
+                          ]),
+                        );
+                      }),
+                  FutureBuilder<List<Crew>>(
+                      future: writers,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return Text(
+                            'Carregando...',
+                            style: theme.bodyText1,
+                          );
+                        return RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: 'Writers: ',
+                              style: theme.bodyText2,
+                            ),
+                            TextSpan(
+                              text: snapshot.data.asMap().keys.fold('',
+                                  (previousValue, index) {
+                                if (index == snapshot.data.length - 1) {
+                                  return '$previousValue${snapshot.data[index].name}.';
+                                }
+                                return '$previousValue${snapshot.data[index].name}, ';
+                              }),
+                              style: theme.bodyText1,
+                            ),
+                          ]),
+                        );
+                      }),
                 ],
               ),
             ),
