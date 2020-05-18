@@ -1,5 +1,7 @@
 import 'package:cinema_app/models/genres.dart';
+import 'package:cinema_app/utils/genre_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GenresListHorizontal extends StatelessWidget {
   const GenresListHorizontal({
@@ -11,6 +13,7 @@ class GenresListHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       height: 80,
       child: ListView.separated(
@@ -20,8 +23,22 @@ class GenresListHorizontal extends StatelessWidget {
         ),
         itemCount: genresList.length,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, i) => Text(
-          genresList[i].name,
+        itemBuilder: (context, i) => Column(
+          children: <Widget>[
+            genreIcons[genresList[i].name] != null
+                ? SvgPicture.asset(
+                    genreIcons[genresList[i].name],
+                    height: theme.iconTheme.size,
+                    width: theme.iconTheme.size,
+                  )
+                : SizedBox(
+                    height: 50,
+                    width: 50,
+                  ),
+            Text(
+              genresList[i].name,
+            ),
+          ],
         ),
       ),
     );

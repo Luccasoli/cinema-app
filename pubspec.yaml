@@ -28,6 +28,7 @@ dependencies:
   intl: ^0.16.1
   get: ^2.5.5
   youtube_player_flutter: ^6.1.1
+  flutter_svg: ^0.17.4
 
 dev_dependencies:
   flutter_test:
@@ -46,8 +47,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+   - assets/color_cinema_icons/
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
