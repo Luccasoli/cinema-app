@@ -11,7 +11,6 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        StatusBar(),
         Padding(
           padding: const EdgeInsets.only(
             top: 10,

@@ -11,6 +11,7 @@ import 'package:cinema_app/widgets/header.dart';
 import 'package:cinema_app/widgets/movies_list_horizontal.dart';
 import 'package:cinema_app/widgets/recents_movie_item.dart';
 import 'package:cinema_app/widgets/section_title.dart';
+import 'package:cinema_app/widgets/status_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
@@ -90,125 +91,142 @@ class _HomePageState extends State<HomePage> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: <Widget>[
-          CustomScrollView(
-            controller: _controller2,
-            slivers: <Widget>[
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 100.0,
-                  maxHeight: 200.0,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: 100),
-                    child: Container(
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: theme.primaryColor,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(25),
-                          bottomLeft: Radius.circular(25),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SliverFixedExtentList(
-                itemExtent: screenSize.height,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.transparent),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          DefaultPadding(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          StatusBar(),
+          Expanded(
+            child: Stack(
               children: <Widget>[
-                Header(),
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            SectionTitle(
-                              title: 'Trendings',
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            MoviesListHorizontal(
-                              popularMoviesList: popularMoviesList,
-                              genresList: genresList,
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                SectionTitle(
-                                  title: 'Category',
-                                  color: theme.accentColor,
+                CustomScrollView(
+                  controller: _controller2,
+                  slivers: <Widget>[
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _SliverAppBarDelegate(
+                        minHeight: 74.5,
+                        maxHeight: 200.0,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              constraints: BoxConstraints(minHeight: 74.5),
+                              decoration: BoxDecoration(
+                                color: theme.primaryColor,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(25),
+                                  bottomLeft: Radius.circular(25),
                                 ),
-                                OutlineButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'See more',
-                                    style: theme.textTheme.caption.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black38,
-                                    ),
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
-                            GenresListHorizontal(genresList: genresList),
+                            Positioned(
+                              top: -70,
+                              right: -50,
+                              child: Container(
+                                height: 230,
+                                width: 230,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF5f5eb7),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                      SliverPersistentHeader(
-                        pinned: true,
-                        delegate: _SliverAppBarDelegate(
-                          minHeight: 50.0,
-                          maxHeight: 50.0,
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            color: theme.scaffoldBackgroundColor,
-                            child: SectionTitle(
-                              title: 'Recents',
-                              color: theme.accentColor,
+                    ),
+                    SliverFillRemaining(),
+                  ],
+                ),
+                DefaultPadding(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Header(),
+                      Expanded(
+                        child: CustomScrollView(
+                          slivers: <Widget>[
+                            SliverList(
+                              delegate: SliverChildListDelegate(
+                                [
+                                  SectionTitle(
+                                    title: 'Trendings',
+                                  ),
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  MoviesListHorizontal(
+                                    popularMoviesList: popularMoviesList,
+                                    genresList: genresList,
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      SectionTitle(
+                                        title: 'Category',
+                                        color: theme.accentColor,
+                                      ),
+                                      OutlineButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'See more',
+                                          style:
+                                              theme.textTheme.caption.copyWith(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black38,
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  GenresListHorizontal(genresList: genresList),
+                                ],
+                              ),
                             ),
-                          ),
+                            SliverPersistentHeader(
+                              pinned: true,
+                              delegate: _SliverAppBarDelegate(
+                                minHeight: 50.0,
+                                maxHeight: 50.0,
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  color: theme.scaffoldBackgroundColor,
+                                  child: SectionTitle(
+                                    title: 'Recents',
+                                    color: theme.accentColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SliverGrid(
+                              delegate: SliverChildBuilderDelegate(
+                                (BuildContext context, int index) {
+                                  return RecentMovieItem(
+                                    movie: popularMoviesList[index],
+                                    genresList: genresList,
+                                  );
+                                },
+                                childCount: popularMoviesList.length,
+                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: screenSize.width / 2,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 1 / 2,
+                              ),
+                            )
+                          ],
+                          controller: _controller1,
                         ),
                       ),
-                      SliverGrid(
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                            return RecentMovieItem(
-                              movie: popularMoviesList[index],
-                              genresList: genresList,
-                            );
-                          },
-                          childCount: popularMoviesList.length,
-                        ),
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: screenSize.width / 2,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 1 / 2,
-                        ),
-                      )
                     ],
-                    controller: _controller1,
                   ),
                 ),
               ],
