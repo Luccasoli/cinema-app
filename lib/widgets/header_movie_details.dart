@@ -6,6 +6,7 @@ import 'package:cinema_app/widgets/genre_list_chips.dart';
 import 'package:cinema_app/widgets/movie_title_and_release_date.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HeaderMovieDetails extends StatefulWidget {
   const HeaderMovieDetails({
@@ -23,6 +24,8 @@ class HeaderMovieDetails extends StatefulWidget {
 
 class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
   Future<MovieDetailsModel> movieDetailed;
+  YoutubePlayerController _youtubeController;
+  bool playTrailer = false;
 
   @override
   void initState() {
@@ -39,6 +42,13 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
   Widget build(BuildContext context) {
     final fontSize = MediaQuery.of(context).size.width * 0.07;
     final size = MediaQuery.of(context).size;
+
+    if (playTrailer) {
+      return YoutubePlayer(
+        controller: _youtubeController,
+        showVideoProgressIndicator: true,
+      );
+    }
     return Stack(
       children: [
         Hero(
@@ -176,28 +186,52 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                       ),
                       Align(
                         alignment: Alignment.center,
-                        child: Container(
-                          height: 45,
-                          width: 45,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xFFff7652).withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 7,
-                              ),
-                            ],
-                            color: Color(0xFFff7652),
-                            borderRadius: BorderRadius.circular(
-                              30,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            size: 30,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: FutureBuilder<MovieDetailsModel>(
+                            future: movieDetailed,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return Container();
+                              }
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _youtubeController =
+                                        YoutubePlayerController(
+                                      initialVideoId:
+                                          snapshot.data.videos.results[0].key,
+                                      flags: YoutubePlayerFlags(
+                                        autoPlay: true,
+                                        mute: false,
+                                      ),
+                                    );
+                                    playTrailer = true;
+                                  });
+                                },
+                                child: Container(
+                                  height: 45,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Color(0xFFff7652).withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                      ),
+                                    ],
+                                    color: Color(0xFFff7652),
+                                    borderRadius: BorderRadius.circular(
+                                      30,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.play_arrow,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            }),
                       )
                     ],
                   ),

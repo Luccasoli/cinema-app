@@ -82,7 +82,7 @@ class MoviesApi {
   Future<MovieDetailsModel> getMovie(
     int movieId, {
     String language,
-    String appendToResponse,
+    String appendToResponse = 'videos',
   }) async {
     try {
       Response response = await dio.get(
