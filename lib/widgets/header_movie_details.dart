@@ -180,6 +180,13 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                           height: 45,
                           width: 45,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xFFff7652).withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 7,
+                              ),
+                            ],
                             color: Color(0xFFff7652),
                             borderRadius: BorderRadius.circular(
                               30,
