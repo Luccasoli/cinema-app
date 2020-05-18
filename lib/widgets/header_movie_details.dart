@@ -44,9 +44,20 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
     final size = MediaQuery.of(context).size;
 
     if (playTrailer) {
-      return YoutubePlayer(
-        controller: _youtubeController,
-        showVideoProgressIndicator: true,
+      return ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(25),
+          bottomLeft: Radius.circular(25),
+        ),
+        child: YoutubePlayer(
+          controller: _youtubeController,
+          showVideoProgressIndicator: true,
+          onEnded: (metaData) {
+            setState(() {
+              playTrailer = false;
+            });
+          },
+        ),
       );
     }
     return Stack(
@@ -190,7 +201,10 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                             future: movieDetailed,
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
-                                return Container();
+                                return SizedBox(
+                                  height: 45,
+                                  width: 45,
+                                );
                               }
                               return InkWell(
                                 onTap: () {
