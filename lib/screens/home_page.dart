@@ -160,31 +160,10 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      SectionTitle(
-                                        title: 'Category',
-                                        color: theme.accentColor,
-                                      ),
-                                      OutlineButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'See more',
-                                          style:
-                                              theme.textTheme.caption.copyWith(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black38,
-                                          ),
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ),
-                                      )
-                                    ],
+                                  SectionTitle(
+                                    title: 'Category',
+                                    color: theme.accentColor,
+                                    onSeeMoreClick: () {},
                                   ),
                                   GenresListHorizontal(genresList: genresList),
                                 ],
