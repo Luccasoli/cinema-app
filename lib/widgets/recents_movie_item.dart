@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,9 @@ import 'package:get/get.dart';
 
 class RecentMovieItem extends StatelessWidget {
   final Movie movie;
+  final List<Genres> genresList;
 
-  const RecentMovieItem(this.movie);
+  const RecentMovieItem({@required this.movie, @required this.genresList});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,10 @@ class RecentMovieItem extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(25),
             onTap: () {
-              Get.toNamed(RoutesPath.MovieDetails, arguments: movie);
+              Get.toNamed(RoutesPath.MovieDetails, arguments: {
+                'movie': movie,
+                'genresList': genresList,
+              });
             },
             child: Image.network(
               'https://image.tmdb.org/t/p/w500/${movie.posterPath}',

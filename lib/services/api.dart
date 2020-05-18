@@ -1,5 +1,6 @@
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/genres.dart';
+import 'package:cinema_app/models/movie_details_model.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
 import 'package:dio/dio.dart';
@@ -65,12 +66,33 @@ class MoviesApi {
     }
   }
 
-  Future<CastList> getCast(int movieId) async {
+  Future<CastList> getCast(
+    int movieId,
+  ) async {
     try {
       Response response = await dio.get(
         '/3/movie/$movieId/credits',
       );
       return CastList.fromJson(response.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<MovieDetailsModel> getMovie(
+    int movieId, {
+    String language,
+    String appendToResponse,
+  }) async {
+    try {
+      Response response = await dio.get(
+        '/3/movie/$movieId',
+        queryParameters: {
+          "language": language,
+          "append_to_response": appendToResponse,
+        },
+      );
+      return MovieDetailsModel.fromJson(response.data);
     } catch (error) {
       throw error;
     }

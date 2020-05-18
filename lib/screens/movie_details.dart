@@ -1,4 +1,5 @@
 import 'package:cinema_app/models/cast.dart';
+import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/widgets/cast_section.dart';
@@ -20,13 +21,15 @@ class _MovieDetailsState extends State<MovieDetails> {
   Future<CastList> castList;
   Future<Crew> director;
   Future<List<Crew>> writers;
+  List<Genres> genresList;
   Movie movie;
 
   @override
   void initState() {
     super.initState();
-    print('initState');
-    movie = Get.arguments;
+    movie = (Get.arguments as Map)['movie'];
+    genresList = (Get.arguments as Map)['genresList'];
+
     api.getCast(movie.id).then(
       (value) {
         setState(() {
@@ -43,12 +46,14 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print(movie);
     return Scaffold(
       body: Column(
         children: <Widget>[
           StatusBar(),
-          HeaderMovieDetails(movie: movie),
+          HeaderMovieDetails(
+            movie: movie,
+            genresList: genresList,
+          ),
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),

@@ -194,7 +194,10 @@ class _HomePageState extends State<HomePage> {
                       SliverGrid(
                         delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
-                            return RecentMovieItem(popularMoviesList[index]);
+                            return RecentMovieItem(
+                              movie: popularMoviesList[index],
+                              genresList: genresList,
+                            );
                           },
                           childCount: popularMoviesList.length,
                         ),

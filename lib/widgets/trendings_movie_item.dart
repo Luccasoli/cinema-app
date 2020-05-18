@@ -22,7 +22,10 @@ class TrendingsMovieItem extends StatelessWidget {
     final fontSize = MediaQuery.of(context).size.width * 0.05;
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesPath.MovieDetails, arguments: movieItem);
+        Get.toNamed(RoutesPath.MovieDetails, arguments: {
+          'movie': movieItem,
+          'genresList': genresList,
+        });
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
@@ -46,7 +49,7 @@ class TrendingsMovieItem extends StatelessWidget {
                     end: FractionalOffset.centerRight,
                     colors: [
                       Colors.black54,
-                      Colors.grey.withOpacity(0.0),
+                      Colors.transparent.withOpacity(0.0),
                     ],
                     stops: [0.1, 1.0],
                   ),
