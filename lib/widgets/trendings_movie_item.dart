@@ -4,6 +4,9 @@ import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'genre_list_chips.dart';
+import 'movie_title_and_release_date.dart';
+
 class TrendingsMovieItem extends StatelessWidget {
   const TrendingsMovieItem({
     Key key,
@@ -17,7 +20,6 @@ class TrendingsMovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontSize = MediaQuery.of(context).size.width * 0.05;
-    final theme = Theme.of(context);
     return InkWell(
       onTap: () {
         Get.toNamed(RoutesPath.MovieDetails, arguments: movieItem);
@@ -63,61 +65,17 @@ class TrendingsMovieItem extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: SingleChildScrollView(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          direction: Axis.horizontal,
-                          children: <Widget>[
-                            Text(
-                              movieItem.title,
-                              style: theme.textTheme.title.copyWith(
-                                color: Colors.white,
-                                fontSize: fontSize,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '(${movieItem.releaseDate.split('-')[0]})',
-                              style: theme.textTheme.subtitle.copyWith(
-                                color: Colors.white60,
-                                fontSize: fontSize * 0.8,
-                              ),
-                            ),
-                          ],
+                        child: MovieTitleAndReleaseDate(
+                          movieItem: movieItem,
+                          fontSize: fontSize,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Expanded(
-                      child: ListView.separated(
-                          separatorBuilder: (context, i) => SizedBox(
-                                width: 10,
-                              ),
-                          itemCount: movieItem.genreIds.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, i) => Theme(
-                                data:
-                                    ThemeData(canvasColor: Colors.transparent),
-                                child: Chip(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                  ),
-                                  backgroundColor: Colors.white24,
-                                  label: Text(
-                                    genresList
-                                        .firstWhere((item) =>
-                                            item.id == movieItem.genreIds[i])
-                                        .name,
-                                    style: theme.chipTheme.labelStyle.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )),
+                      child: GenreListChips(
+                        movieItem: movieItem,
+                        genresList: genresList,
+                      ),
                     ),
                   ],
                 ),
