@@ -174,12 +174,23 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                       SizedBox(
                         width: 15,
                       ),
-                      IconButton(
-                        icon: Icon(Icons.play_circle_filled),
-                        iconSize: 60,
-                        tooltip: 'To be built',
-                        color: Colors.orange,
-                        onPressed: () {},
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 45,
+                          width: 45,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFff7652),
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.play_arrow,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
                       )
                     ],
                   ),

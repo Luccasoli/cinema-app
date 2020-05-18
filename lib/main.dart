@@ -20,8 +20,8 @@ void main(List<String> args) {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final primaryColor = hexToColor('#4947a7');
-    final accentColor = hexToColor('#483785');
+    final primaryColor = Color(0xFF4947a7);
+    final accentColor = Color(0xFF483785);
     return GetMaterialApp(
       initialRoute: RoutesPath.Home,
       namedRoutes: Routes.namedRoutes,
