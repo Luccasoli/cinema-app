@@ -14,6 +14,7 @@ class GenresListHorizontal extends StatelessWidget {
     return SizedBox(
       height: 80,
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
         separatorBuilder: (context, i) => SizedBox(
           width: 25,
         ),

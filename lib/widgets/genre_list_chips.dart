@@ -16,6 +16,7 @@ class GenreListChips extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListView.separated(
+        physics: BouncingScrollPhysics(),
         separatorBuilder: (context, i) => SizedBox(
               width: 10,
             ),

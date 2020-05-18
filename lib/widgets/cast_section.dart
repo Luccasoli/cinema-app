@@ -41,6 +41,7 @@ class CastSection extends StatelessWidget {
                 SizedBox(
                   height: 170,
                   child: ListView.separated(
+                    physics: BouncingScrollPhysics(),
                     separatorBuilder: (context, index) => SizedBox(
                       width: 10,
                     ),

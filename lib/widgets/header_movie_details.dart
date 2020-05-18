@@ -177,6 +177,7 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                       IconButton(
                         icon: Icon(Icons.play_circle_filled),
                         iconSize: 60,
+                        tooltip: 'To be built',
                         color: Colors.orange,
                         onPressed: () {},
                       )

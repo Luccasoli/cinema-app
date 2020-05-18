@@ -20,6 +20,7 @@ class MoviesListHorizontal extends StatelessWidget {
         height: MediaQuery.of(context).size.width * 0.45,
       ),
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
         separatorBuilder: (context, i) {
           return SizedBox(
             width: 20,
