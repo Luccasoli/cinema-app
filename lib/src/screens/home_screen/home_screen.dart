@@ -2,11 +2,11 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
-import 'package:cinema_app/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/services/api.dart';
-import 'package:cinema_app/widgets/default_padding_widget.dart';
-import 'package:cinema_app/widgets/section_title_widget.dart';
-import 'package:cinema_app/widgets/status_bar_widget.dart';
+import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
+import 'package:cinema_app/src/widgets/default_padding_widget.dart';
+import 'package:cinema_app/src/widgets/section_title_widget.dart';
+import 'package:cinema_app/src/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 

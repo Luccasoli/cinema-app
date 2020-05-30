@@ -1,12 +1,12 @@
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/screens/movie_details_screen/widgets/cast_section_widget.dart';
-import 'package:cinema_app/screens/movie_details_screen/widgets/filmmaking_details_widget.dart';
-import 'package:cinema_app/screens/movie_details_screen/widgets/reviews_widget.dart';
 import 'package:cinema_app/services/api.dart';
-import 'package:cinema_app/widgets/default_padding_widget.dart';
-import 'package:cinema_app/widgets/status_bar_widget.dart';
+import 'package:cinema_app/src/screens/movie_details_screen/widgets/cast_section_widget.dart';
+import 'package:cinema_app/src/screens/movie_details_screen/widgets/filmmaking_details_widget.dart';
+import 'package:cinema_app/src/screens/movie_details_screen/widgets/reviews_widget.dart';
+import 'package:cinema_app/src/widgets/default_padding_widget.dart';
+import 'package:cinema_app/src/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

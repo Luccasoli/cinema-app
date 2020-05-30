@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/utils.dart';
+import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,10 +1,9 @@
-import 'package:cinema_app/screens/movie_details_screen/movie_details_screen.dart';
-import 'package:cinema_app/screens/search_screen/search_screen.dart';
-import 'package:cinema_app/utils.dart';
+import 'package:cinema_app/src/screens/home_screen/home_screen.dart';
+import 'package:cinema_app/src/screens/movie_details_screen/movie_details_screen.dart';
+import 'package:cinema_app/src/screens/search_screen/search_screen.dart';
+import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'screens/home_screen/home_screen.dart';
 
 class Routes {
   static Map<String, GetRoute> namedRoutes = {
@@ -34,12 +33,15 @@ class Main extends StatelessWidget {
         primaryColor: primaryColor,
         accentColor: accentColor,
         textTheme: ThemeData().textTheme.copyWith(
-              headline6:
-                  ThemeData().textTheme.headline6.copyWith(color: accentColor),
-              bodyText1:
-                  ThemeData().textTheme.bodyText1.copyWith(color: accentColor),
-              bodyText2:
-                  ThemeData().textTheme.bodyText2.copyWith(color: accentColor),
+              headline6: ThemeData().textTheme.headline6.copyWith(
+                    color: accentColor,
+                  ),
+              bodyText1: ThemeData().textTheme.bodyText1.copyWith(
+                    color: accentColor,
+                  ),
+              bodyText2: ThemeData().textTheme.bodyText2.copyWith(
+                    color: accentColor,
+                  ),
             ),
       ),
     );

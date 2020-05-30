@@ -1,5 +1,5 @@
-import 'package:cinema_app/utils.dart';
-import 'package:cinema_app/widgets/search_bar_widget.dart';
+import 'package:cinema_app/src/widgets/search_bar_widget.dart';
+import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

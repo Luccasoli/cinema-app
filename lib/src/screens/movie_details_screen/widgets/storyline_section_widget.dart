@@ -1,5 +1,5 @@
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/widgets/section_title_widget.dart';
+import 'package:cinema_app/src/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
 class StorylineSectionWidget extends StatelessWidget {

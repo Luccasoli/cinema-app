@@ -1,6 +1,6 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/screens/home_screen/widgets/trendings_movie_item_widget.dart';
+import 'package:cinema_app/src/screens/home_screen/widgets/trendings_movie_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class TrendingMoviesListHorizontalWidget extends StatelessWidget {
