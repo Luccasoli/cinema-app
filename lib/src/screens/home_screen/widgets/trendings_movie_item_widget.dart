@@ -1,7 +1,7 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/src/widgets/genre_list_chips_widget.dart';
-import 'package:cinema_app/src/widgets/movie_title_and_release_date_widget.dart';
+import 'package:cinema_app/src/shared/widgets/genre_list_chips_widget.dart';
+import 'package:cinema_app/src/shared/widgets/movie_title_and_release_date_widget.dart';
 import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
