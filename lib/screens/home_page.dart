@@ -105,31 +105,33 @@ class _HomePageState extends State<HomePage> {
                       delegate: _SliverAppBarDelegate(
                         minHeight: 74.5,
                         maxHeight: 200.0,
-                        child: Stack(
-                          children: <Widget>[
-                            Container(
-                              constraints: BoxConstraints(minHeight: 74.5),
-                              decoration: BoxDecoration(
-                                color: theme.primaryColor,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(25),
-                                  bottomLeft: Radius.circular(25),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: -70,
-                              right: -50,
-                              child: Container(
-                                height: 230,
-                                width: 230,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(25),
+                            bottomLeft: Radius.circular(25),
+                          ),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                constraints: BoxConstraints(minHeight: 74.5),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF5f5eb7),
-                                  shape: BoxShape.circle,
+                                  color: theme.primaryColor,
                                 ),
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                top: -70,
+                                right: -50,
+                                child: Container(
+                                  height: 230,
+                                  width: 230,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF5f5eb7),
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
