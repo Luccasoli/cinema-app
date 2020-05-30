@@ -2,14 +2,14 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/movie_details_model.dart';
 import 'package:cinema_app/services/api.dart';
-import 'package:cinema_app/widgets/genre_list_chips.dart';
-import 'package:cinema_app/widgets/movie_title_and_release_date.dart';
+import 'package:cinema_app/widgets/genre_list_chips_widget.dart';
+import 'package:cinema_app/widgets/movie_title_and_release_date_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class HeaderMovieDetails extends StatefulWidget {
-  const HeaderMovieDetails({
+class HeaderMovieDetailsScreenWidget extends StatefulWidget {
+  const HeaderMovieDetailsScreenWidget({
     Key key,
     @required this.movie,
     @required this.genresList,
@@ -19,10 +19,12 @@ class HeaderMovieDetails extends StatefulWidget {
   final Movie movie;
 
   @override
-  _HeaderMovieDetailsState createState() => _HeaderMovieDetailsState();
+  _HeaderMovieDetailsScreenWidgetState createState() =>
+      _HeaderMovieDetailsScreenWidgetState();
 }
 
-class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
+class _HeaderMovieDetailsScreenWidgetState
+    extends State<HeaderMovieDetailsScreenWidget> {
   Future<MovieDetailsModel> movieDetailed;
   YoutubePlayerController _youtubeController;
   bool playTrailer = false;
@@ -137,7 +139,7 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                               child: SingleChildScrollView(
                                 reverse: true,
                                 physics: BouncingScrollPhysics(),
-                                child: MovieTitleAndReleaseDate(
+                                child: MovieTitleAndReleaseDateWidget(
                                   movieItem: widget.movie,
                                   fontSize: fontSize,
                                 ),
@@ -184,7 +186,7 @@ class _HeaderMovieDetailsState extends State<HeaderMovieDetails> {
                                   );
                                 }),
                             Expanded(
-                              child: GenreListChips(
+                              child: GenreListChipsWidget(
                                 movieItem: widget.movie,
                                 genresList: widget.genresList,
                               ),

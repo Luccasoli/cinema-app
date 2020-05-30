@@ -1,13 +1,16 @@
-import 'package:cinema_app/screens/home_page.dart';
-import 'package:cinema_app/screens/movie_details.dart';
+import 'package:cinema_app/screens/movie_details_screen/movie_details_screen.dart';
+import 'package:cinema_app/screens/search_screen/search_screen.dart';
 import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'screens/home_screen/home_screen.dart';
+
 class Routes {
   static Map<String, GetRoute> namedRoutes = {
-    RoutesPath.Home: GetRoute(page: HomePage()),
-    RoutesPath.MovieDetails: GetRoute(page: MovieDetails()),
+    RoutesPath.Home: GetRoute(page: HomeScreen()),
+    RoutesPath.MovieDetails: GetRoute(page: MovieDetailsScreen()),
+    RoutesPath.SearchScreen: GetRoute(page: SearchScreen()),
   };
 }
 

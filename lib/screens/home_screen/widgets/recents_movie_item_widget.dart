@@ -5,11 +5,12 @@ import 'package:cinema_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RecentMovieItem extends StatelessWidget {
+class RecentMovieItemWidget extends StatelessWidget {
   final Movie movie;
   final List<Genres> genresList;
 
-  const RecentMovieItem({@required this.movie, @required this.genresList});
+  const RecentMovieItemWidget(
+      {@required this.movie, @required this.genresList});
 
   @override
   Widget build(BuildContext context) {

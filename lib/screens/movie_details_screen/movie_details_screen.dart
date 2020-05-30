@@ -1,23 +1,24 @@
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
+import 'package:cinema_app/screens/movie_details_screen/widgets/cast_section_widget.dart';
+import 'package:cinema_app/screens/movie_details_screen/widgets/filmmaking_details_widget.dart';
+import 'package:cinema_app/screens/movie_details_screen/widgets/reviews_widget.dart';
 import 'package:cinema_app/services/api.dart';
-import 'package:cinema_app/widgets/cast_section.dart';
-import 'package:cinema_app/widgets/default_padding.dart';
-import 'package:cinema_app/widgets/filmmaking_details.dart';
-import 'package:cinema_app/widgets/header_movie_details.dart';
-import 'package:cinema_app/widgets/reviews.dart';
-import 'package:cinema_app/widgets/status_bar.dart';
-import 'package:cinema_app/widgets/storyline_section.dart';
+import 'package:cinema_app/widgets/default_padding_widget.dart';
+import 'package:cinema_app/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MovieDetails extends StatefulWidget {
+import 'widgets/header_movie_details_screen_widget.dart';
+import 'widgets/storyline_section_widget.dart';
+
+class MovieDetailsScreen extends StatefulWidget {
   @override
-  _MovieDetailsState createState() => _MovieDetailsState();
+  _MovieDetailsScreenState createState() => _MovieDetailsScreenState();
 }
 
-class _MovieDetailsState extends State<MovieDetails> {
+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   Future<CastList> castList;
   Future<Crew> director;
   Future<List<Crew>> writers;
@@ -49,27 +50,27 @@ class _MovieDetailsState extends State<MovieDetails> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          StatusBar(),
-          HeaderMovieDetails(
+          StatusBarWidget(),
+          HeaderMovieDetailsScreenWidget(
             movie: movie,
             genresList: genresList,
           ),
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: DefaultPadding(
+              child: DefaultPaddingWidget(
                 child: Column(
                   children: <Widget>[
-                    Reviews(),
-                    FilmmakingDetails(
+                    ReviewsWidget(),
+                    FilmmakingDetailsWidget(
                       director: director,
                       writers: writers,
                       movie: movie,
                     ),
-                    StorylineSection(
+                    StorylineSectionWidget(
                       movie: movie,
                     ),
-                    CastSection(
+                    CastSectionWidget(
                       movie: movie,
                       castList: castList,
                     ),

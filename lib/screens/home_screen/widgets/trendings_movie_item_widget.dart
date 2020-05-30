@@ -1,14 +1,13 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/utils.dart';
+import 'package:cinema_app/widgets/genre_list_chips_widget.dart';
+import 'package:cinema_app/widgets/movie_title_and_release_date_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'genre_list_chips.dart';
-import 'movie_title_and_release_date.dart';
-
-class TrendingsMovieItem extends StatelessWidget {
-  const TrendingsMovieItem({
+class TrendingsMovieItemWidget extends StatelessWidget {
+  const TrendingsMovieItemWidget({
     Key key,
     @required this.movieItem,
     @required this.genresList,
@@ -68,14 +67,14 @@ class TrendingsMovieItem extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: SingleChildScrollView(
-                        child: MovieTitleAndReleaseDate(
+                        child: MovieTitleAndReleaseDateWidget(
                           movieItem: movieItem,
                           fontSize: fontSize,
                         ),
                       ),
                     ),
                     Expanded(
-                      child: GenreListChips(
+                      child: GenreListChipsWidget(
                         movieItem: movieItem,
                         genresList: genresList,
                       ),

@@ -3,8 +3,8 @@ import 'package:cinema_app/utils/genre_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class GenresListHorizontal extends StatelessWidget {
-  const GenresListHorizontal({
+class GenresListHorizontalWidget extends StatelessWidget {
+  const GenresListHorizontalWidget({
     Key key,
     @required this.genresList,
   }) : super(key: key);

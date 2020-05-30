@@ -1,53 +1,26 @@
-import 'dart:math';
-
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
+import 'package:cinema_app/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/services/api.dart';
-import 'package:cinema_app/widgets/default_padding.dart';
-import 'package:cinema_app/widgets/genres_list_horizontal.dart';
-import 'package:cinema_app/widgets/header.dart';
-import 'package:cinema_app/widgets/movies_list_horizontal.dart';
-import 'package:cinema_app/widgets/recents_movie_item.dart';
-import 'package:cinema_app/widgets/section_title.dart';
-import 'package:cinema_app/widgets/status_bar.dart';
+import 'package:cinema_app/widgets/default_padding_widget.dart';
+import 'package:cinema_app/widgets/section_title_widget.dart';
+import 'package:cinema_app/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.child,
-  });
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-  @override
-  double get minExtent => minHeight;
-  @override
-  double get maxExtent => max(maxHeight, minHeight);
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
-  }
+import 'widgets/genres_list_horizontal.dart';
+import 'widgets/recents_movie_item_widget.dart';
+import 'widgets/sliver_app_delegate.dart';
+import 'widgets/trending_movies_horizontal_list_widget.dart';
 
+class HomeScreen extends StatefulWidget {
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
-  }
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   List<Movie> popularMoviesList = [];
   List<Genres> genresList = [];
   List<Movie> nowPlayingMoviesList = [];
@@ -93,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          StatusBar(),
+          StatusBarWidget(),
           Expanded(
             child: Stack(
               children: <Widget>[
@@ -102,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                   slivers: <Widget>[
                     SliverPersistentHeader(
                       pinned: true,
-                      delegate: _SliverAppBarDelegate(
+                      delegate: SliverAppBarDelegate(
                         minHeight: 74.5,
                         maxHeight: 200.0,
                         child: ClipRRect(
@@ -138,48 +111,50 @@ class _HomePageState extends State<HomePage> {
                     SliverFillRemaining(),
                   ],
                 ),
-                DefaultPadding(
+                DefaultPaddingWidget(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Header(),
+                      HeaderHomeScreenWidget(),
                       Expanded(
                         child: CustomScrollView(
                           slivers: <Widget>[
                             SliverList(
                               delegate: SliverChildListDelegate(
                                 [
-                                  SectionTitle(
+                                  SectionTitleWidget(
                                     title: 'Trendings',
                                   ),
                                   SizedBox(
                                     height: 25,
                                   ),
-                                  MoviesListHorizontal(
+                                  TrendingMoviesListHorizontalWidget(
                                     popularMoviesList: popularMoviesList,
                                     genresList: genresList,
                                   ),
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  SectionTitle(
+                                  SectionTitleWidget(
                                     title: 'Category',
                                     color: theme.accentColor,
                                     onSeeMoreClick: () {},
                                   ),
-                                  GenresListHorizontal(genresList: genresList),
+                                  GenresListHorizontalWidget(
+                                    genresList: genresList,
+                                  ),
                                 ],
                               ),
                             ),
                             SliverPersistentHeader(
                               pinned: true,
-                              delegate: _SliverAppBarDelegate(
+                              delegate: SliverAppBarDelegate(
                                 minHeight: 50.0,
                                 maxHeight: 50.0,
                                 child: Container(
                                   alignment: Alignment.centerLeft,
                                   color: theme.scaffoldBackgroundColor,
-                                  child: SectionTitle(
+                                  child: SectionTitleWidget(
                                     title: 'Recents',
                                     color: theme.accentColor,
                                   ),
@@ -189,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                             SliverGrid(
                               delegate: SliverChildBuilderDelegate(
                                 (BuildContext context, int index) {
-                                  return RecentMovieItem(
+                                  return RecentMovieItemWidget(
                                     movie: popularMoviesList[index],
                                     genresList: genresList,
                                   );

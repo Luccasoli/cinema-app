@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SectionTitle extends StatelessWidget {
-  const SectionTitle({
+class SectionTitleWidget extends StatelessWidget {
+  const SectionTitleWidget({
     Key key,
     @required this.title,
     this.onSeeMoreClick,

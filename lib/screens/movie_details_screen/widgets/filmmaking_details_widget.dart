@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-class FilmmakingDetails extends StatelessWidget {
+class FilmmakingDetailsWidget extends StatelessWidget {
   final Movie movie;
 
-  FilmmakingDetails({
+  FilmmakingDetailsWidget({
     Key key,
     @required this.director,
     @required this.writers,

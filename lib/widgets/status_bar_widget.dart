@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class StatusBar extends StatelessWidget {
+class StatusBarWidget extends StatelessWidget {
   final Color color;
-  const StatusBar({this.color});
+  const StatusBarWidget({this.color});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,10 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/widgets/trendings_movie_item.dart';
+import 'package:cinema_app/screens/home_screen/widgets/trendings_movie_item_widget.dart';
 import 'package:flutter/material.dart';
 
-class MoviesListHorizontal extends StatelessWidget {
-  const MoviesListHorizontal({
+class TrendingMoviesListHorizontalWidget extends StatelessWidget {
+  const TrendingMoviesListHorizontalWidget({
     Key key,
     @required this.popularMoviesList,
     @required this.genresList,
@@ -29,7 +29,7 @@ class MoviesListHorizontal extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: popularMoviesList.length,
         itemBuilder: (context, i) {
-          return TrendingsMovieItem(
+          return TrendingsMovieItemWidget(
             movieItem: popularMoviesList[i],
             genresList: genresList,
           );

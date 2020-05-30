@@ -1,9 +1,10 @@
-import 'package:cinema_app/screens/search_bar.dart';
-import 'package:cinema_app/widgets/status_bar.dart';
+import 'package:cinema_app/utils.dart';
+import 'package:cinema_app/widgets/search_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Header extends StatelessWidget {
-  const Header({
+class HeaderHomeScreenWidget extends StatelessWidget {
+  const HeaderHomeScreenWidget({
     Key key,
   }) : super(key: key);
 
@@ -27,7 +28,14 @@ class Header extends StatelessWidget {
                 width: 20,
               ),
               Expanded(
-                child: SearchBar(),
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(RoutesPath.SearchScreen);
+                  },
+                  child: SearchBarWidget(
+                    enabled: false,
+                  ),
+                ),
               ),
             ],
           ),

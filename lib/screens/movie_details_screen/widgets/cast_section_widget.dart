@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/widgets/section_title.dart';
+import 'package:cinema_app/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
-class CastSection extends StatelessWidget {
-  const CastSection({
+class CastSectionWidget extends StatelessWidget {
+  const CastSectionWidget({
     Key key,
     @required this.movie,
     @required this.castList,
@@ -31,7 +31,7 @@ class CastSection extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SectionTitle(
+                SectionTitleWidget(
                   title: 'Full Cast',
                   color: theme.primaryColor,
                 ),

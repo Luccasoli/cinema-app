@@ -2,8 +2,8 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 
-class GenreListChips extends StatelessWidget {
-  const GenreListChips({
+class GenreListChipsWidget extends StatelessWidget {
+  const GenreListChipsWidget({
     Key key,
     @required this.movieItem,
     @required this.genresList,

@@ -1,8 +1,8 @@
 import 'package:cinema_app/models/movie.dart';
 import 'package:flutter/material.dart';
 
-class MovieTitleAndReleaseDate extends StatelessWidget {
-  const MovieTitleAndReleaseDate({
+class MovieTitleAndReleaseDateWidget extends StatelessWidget {
+  const MovieTitleAndReleaseDateWidget({
     Key key,
     @required this.movieItem,
     @required this.fontSize,

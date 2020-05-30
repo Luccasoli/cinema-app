@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DefaultPadding extends StatelessWidget {
+class DefaultPaddingWidget extends StatelessWidget {
   final EdgeInsets padding;
   final Widget child;
 
-  DefaultPadding({
+  DefaultPaddingWidget({
     @required this.child,
     this.padding = const EdgeInsets.symmetric(
       horizontal: 20,

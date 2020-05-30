@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Reviews extends StatelessWidget {
+class ReviewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,15 +10,15 @@ class Reviews extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          ReviewItem(
+          _ReviewItem(
             title: '7.1/10',
             subtitle: 'IMDb',
           ),
-          ReviewItem(
+          _ReviewItem(
             title: '91%',
             subtitle: 'Rotten Tomatoes',
           ),
-          ReviewItem(
+          _ReviewItem(
             title: '71%',
             subtitle: 'Metacritic',
           ),
@@ -28,8 +28,8 @@ class Reviews extends StatelessWidget {
   }
 }
 
-class ReviewItem extends StatelessWidget {
-  const ReviewItem({
+class _ReviewItem extends StatelessWidget {
+  const _ReviewItem({
     Key key,
     @required this.title,
     @required this.subtitle,

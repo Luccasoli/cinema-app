@@ -1,11 +1,11 @@
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/widgets/section_title.dart';
+import 'package:cinema_app/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
-class StorylineSection extends StatelessWidget {
+class StorylineSectionWidget extends StatelessWidget {
   final Movie movie;
 
-  StorylineSection({
+  StorylineSectionWidget({
     Key key,
     @required this.movie,
   }) : super(key: key);
@@ -18,7 +18,7 @@ class StorylineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SectionTitle(
+          SectionTitleWidget(
             title: 'Storyline',
             color: theme.primaryColor,
           ),
