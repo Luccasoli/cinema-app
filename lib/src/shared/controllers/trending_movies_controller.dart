@@ -3,25 +3,16 @@ import 'package:cinema_app/services/api.dart';
 import 'package:get/get.dart';
 
 class TrendingMoviesController extends GetController {
-  List<Movie> _items = [];
+  List<Movie> items = [];
 
   @override
-  void onInit() {
-    api.getPopularMovies().then((result) {
-      this.setItems =
+  void onInit() async {
+    try {
+      final result = await api.getPopularMovies();
+      items =
           result.results.where((item) => item.backdropPath != null).toList();
-    }).catchError((error) {
-      print(error);
-    });
+      update(this);
+    } catch (e) {}
     super.onInit();
   }
-
-  set setItems(newItems) {
-    _items = [...newItems];
-    update(this);
-  }
-
-  List<Movie> get items => [..._items];
-
-  int get itemsCount => _items.length;
 }

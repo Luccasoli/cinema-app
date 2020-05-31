@@ -1,7 +1,6 @@
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
-import 'package:cinema_app/models/popular_movies_list.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
@@ -25,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Genres> genresList = [];
+  List<Movie> nowPlaying = [];
 
   double height = 230;
   ScrollController _controller1;
@@ -34,20 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
     Get.lazyPut<TrendingMoviesController>(() => TrendingMoviesController());
-    Get.lazyPut<NowPlayingMoviesList>(() => NowPlayingMoviesList());
+    Get.lazyPut<NowPlayingMoviesController>(() => NowPlayingMoviesController());
+
     _controllers = LinkedScrollControllerGroup();
     _controller1 = _controllers.addAndGet();
     _controller2 = _controllers.addAndGet();
 
     Future.wait([
       api.getGenresList(),
+      api.getNowPlayingList(),
     ]).then((onValue) => {
           setState(() {
-            final tempGenresList = onValue[0];
+            final tempGenresList = onValue[1] as NowPlayingMoviesList;
 
-            genresList = tempGenresList.genres;
+            nowPlaying = tempGenresList.results
+                .where((item) => item.posterPath != null)
+                .toList();
+
+            // genresList = tempGenresList.genres;
           })
         });
   }
@@ -167,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       genresList: genresList,
                                     );
                                   },
-                                  childCount: _.itemsCount,
+                                  childCount: _.items.length,
                                 ),
                                 gridDelegate:
                                     SliverGridDelegateWithMaxCrossAxisExtent(

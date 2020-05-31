@@ -14,6 +14,7 @@ class RecentMovieItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('RecentMovieItemWidget');
     final theme = Theme.of(context);
     return Column(
       children: <Widget>[
