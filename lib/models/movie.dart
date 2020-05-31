@@ -15,20 +15,20 @@ class Movie {
   double voteAverage;
 
   Movie(
-      {this.posterPath,
-      this.adult,
-      this.overview,
-      this.releaseDate,
-      this.genreIds,
-      this.id,
-      this.originalTitle,
-      this.originalLanguage,
-      this.title,
-      this.backdropPath,
-      this.popularity,
-      this.voteCount,
-      this.video,
-      this.voteAverage});
+      {posterPath,
+      adult,
+      overview,
+      releaseDate,
+      genreIds,
+      id,
+      originalTitle,
+      originalLanguage,
+      title,
+      backdropPath,
+      popularity,
+      voteCount,
+      video,
+      voteAverage});
 
   Movie.fromJson(Map<String, dynamic> json) {
     posterPath = json['poster_path'];
@@ -48,21 +48,21 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['poster_path'] = this.posterPath;
-    data['adult'] = this.adult;
-    data['overview'] = this.overview;
-    data['release_date'] = this.releaseDate;
-    data['genre_ids'] = this.genreIds;
-    data['id'] = this.id;
-    data['original_title'] = this.originalTitle;
-    data['original_language'] = this.originalLanguage;
-    data['title'] = this.title;
-    data['backdrop_path'] = this.backdropPath;
-    data['popularity'] = this.popularity;
-    data['vote_count'] = this.voteCount;
-    data['video'] = this.video;
-    data['vote_average'] = this.voteAverage;
+    final data = Map<String, dynamic>();
+    data['poster_path'] = posterPath;
+    data['adult'] = adult;
+    data['overview'] = overview;
+    data['release_date'] = releaseDate;
+    data['genre_ids'] = genreIds;
+    data['id'] = id;
+    data['original_title'] = originalTitle;
+    data['original_language'] = originalLanguage;
+    data['title'] = title;
+    data['backdrop_path'] = backdropPath;
+    data['popularity'] = popularity;
+    data['vote_count'] = voteCount;
+    data['video'] = video;
+    data['vote_average'] = voteAverage;
     return data;
   }
 }

@@ -24,7 +24,7 @@ class HeaderHomeScreenWidget extends StatelessWidget {
                 Icons.arrow_back,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Expanded(

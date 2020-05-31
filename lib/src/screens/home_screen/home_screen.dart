@@ -1,7 +1,3 @@
-import 'package:cinema_app/models/genres.dart';
-import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/models/now_playing_movies_list.dart';
-import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
@@ -45,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          StatusBarWidget(),
+          const StatusBarWidget(),
           Expanded(
             child: Stack(
               children: <Widget>[
@@ -58,14 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         minHeight: 74.5,
                         maxHeight: 200.0,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomRight: Radius.circular(25),
                             bottomLeft: Radius.circular(25),
                           ),
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                constraints: BoxConstraints(minHeight: 74.5),
+                                constraints: const BoxConstraints(
+                                  minHeight: 74.5,
+                                ),
                                 decoration: BoxDecoration(
                                   color: theme.primaryColor,
                                 ),
@@ -76,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   height: 230,
                                   width: 230,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color(0xFF5f5eb7),
                                     shape: BoxShape.circle,
                                   ),
@@ -87,14 +85,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SliverFillRemaining(),
+                    const SliverFillRemaining(),
                   ],
                 ),
                 DefaultPaddingWidget(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      HeaderHomeScreenWidget(),
+                      const HeaderHomeScreenWidget(),
                       Expanded(
                         child: CustomScrollView(
                           slivers: <Widget>[
@@ -102,10 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (_) => SliverList(
                                 delegate: SliverChildListDelegate(
                                   [
-                                    SectionTitleWidget(
+                                    const SectionTitleWidget(
                                       title: 'Trendings',
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                     GetBuilder<GenresMoviesController>(
@@ -115,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         genresList: genres.items,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     SectionTitleWidget(
@@ -153,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   GetBuilder<NowPlayingMoviesController>(
                                 builder: (_) => SliverGrid(
                                   delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
+                                    (context, index) {
                                       return RecentMovieItemWidget(
                                         movie: _.items[index],
                                         genresList: genres.items,

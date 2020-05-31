@@ -22,7 +22,7 @@ class StorylineSectionWidget extends StatelessWidget {
             title: 'Storyline',
             color: theme.primaryColor,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(movie.overview),

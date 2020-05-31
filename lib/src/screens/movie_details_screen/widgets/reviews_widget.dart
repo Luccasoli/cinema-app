@@ -10,15 +10,15 @@ class ReviewsWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _ReviewItem(
+          const _ReviewItem(
             title: '7.1/10',
             subtitle: 'IMDb',
           ),
-          _ReviewItem(
+          const _ReviewItem(
             title: '91%',
             subtitle: 'Rotten Tomatoes',
           ),
-          _ReviewItem(
+          const _ReviewItem(
             title: '71%',
             subtitle: 'Metacritic',
           ),

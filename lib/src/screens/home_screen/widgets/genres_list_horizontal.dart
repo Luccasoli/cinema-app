@@ -17,8 +17,8 @@ class GenresListHorizontalWidget extends StatelessWidget {
     return SizedBox(
       height: 80,
       child: ListView.separated(
-        physics: BouncingScrollPhysics(),
-        separatorBuilder: (context, i) => SizedBox(
+        physics: const BouncingScrollPhysics(),
+        separatorBuilder: (context, i) => const SizedBox(
           width: 25,
         ),
         itemCount: genresList.length,
@@ -31,7 +31,7 @@ class GenresListHorizontalWidget extends StatelessWidget {
                     height: theme.iconTheme.size,
                     width: theme.iconTheme.size,
                   )
-                : SizedBox(
+                : const SizedBox(
                     height: 50,
                     width: 50,
                   ),

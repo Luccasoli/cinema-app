@@ -50,14 +50,14 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          StatusBarWidget(),
+          const StatusBarWidget(),
           HeaderMovieDetailsScreenWidget(
             movie: movie,
             genresList: genresList,
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: DefaultPaddingWidget(
                 child: Column(
                   children: <Widget>[

@@ -16,8 +16,8 @@ class GenreListChipsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListView.separated(
-        physics: BouncingScrollPhysics(),
-        separatorBuilder: (context, i) => SizedBox(
+        physics: const BouncingScrollPhysics(),
+        separatorBuilder: (context, i) => const SizedBox(
               width: 10,
             ),
         itemCount: movieItem.genreIds.length,
@@ -25,7 +25,7 @@ class GenreListChipsWidget extends StatelessWidget {
         itemBuilder: (context, i) => Theme(
               data: ThemeData(canvasColor: Colors.transparent),
               child: Chip(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 15,
                 ),
                 backgroundColor: Colors.white24,

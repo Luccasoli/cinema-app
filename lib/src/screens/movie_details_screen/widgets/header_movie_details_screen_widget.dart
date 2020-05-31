@@ -47,7 +47,7 @@ class _HeaderMovieDetailsScreenWidgetState
 
     if (playTrailer) {
       return ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(25),
           bottomLeft: Radius.circular(25),
         ),
@@ -72,7 +72,7 @@ class _HeaderMovieDetailsScreenWidgetState
               minWidth: size.width,
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(25),
                 bottomLeft: Radius.circular(25),
               ),
@@ -87,7 +87,7 @@ class _HeaderMovieDetailsScreenWidgetState
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(25),
                 bottomLeft: Radius.circular(25),
               ),
@@ -108,9 +108,7 @@ class _HeaderMovieDetailsScreenWidgetState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               InkWell(
-                onTap: () {
-                  Get.back();
-                },
+                onTap: Get.back,
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: 18,
@@ -127,7 +125,10 @@ class _HeaderMovieDetailsScreenWidgetState
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -138,7 +139,7 @@ class _HeaderMovieDetailsScreenWidgetState
                             Expanded(
                               child: SingleChildScrollView(
                                 reverse: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 child: MovieTitleAndReleaseDateWidget(
                                   movieItem: widget.movie,
                                   fontSize: fontSize,
@@ -194,7 +195,7 @@ class _HeaderMovieDetailsScreenWidgetState
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Align(
@@ -203,11 +204,16 @@ class _HeaderMovieDetailsScreenWidgetState
                             future: movieDetailed,
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
-                                return SizedBox(
+                                return const SizedBox(
                                   height: 45,
                                   width: 45,
                                 );
                               }
+                              var boxShadow2 = BoxShadow(
+                                color: const Color(0xFFff7652).withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 7,
+                              );
                               return InkWell(
                                 onTap: () {
                                   setState(() {
@@ -215,7 +221,7 @@ class _HeaderMovieDetailsScreenWidgetState
                                         YoutubePlayerController(
                                       initialVideoId:
                                           snapshot.data.videos.results[0].key,
-                                      flags: YoutubePlayerFlags(
+                                      flags: const YoutubePlayerFlags(
                                         autoPlay: true,
                                         mute: false,
                                       ),
@@ -228,14 +234,9 @@ class _HeaderMovieDetailsScreenWidgetState
                                   width: 45,
                                   decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            Color(0xFFff7652).withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 7,
-                                      ),
+                                      boxShadow2,
                                     ],
-                                    color: Color(0xFFff7652),
+                                    color: const Color(0xFFff7652),
                                     borderRadius: BorderRadius.circular(
                                       30,
                                     ),

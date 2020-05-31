@@ -8,7 +8,7 @@ class StatusBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).padding.top,
-      color: this.color ?? Theme.of(context).primaryColor,
+      color: color ?? Theme.of(context).primaryColor,
     );
   }
 }
