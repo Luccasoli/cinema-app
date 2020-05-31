@@ -3,6 +3,7 @@ import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
+import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/trending_movies_controller.dart';
 import 'package:cinema_app/src/shared/widgets/default_padding_widget.dart';
@@ -23,9 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Genres> genresList = [];
-  List<Movie> nowPlaying = [];
-
   double height = 230;
   ScrollController _controller1;
   ScrollController _controller2;
@@ -36,25 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     Get.lazyPut<TrendingMoviesController>(() => TrendingMoviesController());
     Get.lazyPut<NowPlayingMoviesController>(() => NowPlayingMoviesController());
+    Get.lazyPut<GenresMoviesController>(() => GenresMoviesController());
 
     _controllers = LinkedScrollControllerGroup();
     _controller1 = _controllers.addAndGet();
     _controller2 = _controllers.addAndGet();
-
-    Future.wait([
-      api.getGenresList(),
-      api.getNowPlayingList(),
-    ]).then((onValue) => {
-          setState(() {
-            final tempGenresList = onValue[1] as NowPlayingMoviesList;
-
-            nowPlaying = tempGenresList.results
-                .where((item) => item.posterPath != null)
-                .toList();
-
-            // genresList = tempGenresList.genres;
-          })
-        });
   }
 
   @override
@@ -127,11 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SizedBox(
                                     height: 25,
                                   ),
-                                  GetBuilder<TrendingMoviesController>(
-                                    builder: (_) =>
-                                        TrendingMoviesListHorizontalWidget(
-                                      popularMoviesList: _.items,
-                                      genresList: genresList,
+                                  GetBuilder<GenresMoviesController>(
+                                    builder: (genres) =>
+                                        GetBuilder<TrendingMoviesController>(
+                                      builder: (_) =>
+                                          TrendingMoviesListHorizontalWidget(
+                                        popularMoviesList: _.items,
+                                        genresList: genres.items,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -142,8 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: theme.accentColor,
                                     onSeeMoreClick: () {},
                                   ),
-                                  GenresListHorizontalWidget(
-                                    genresList: genresList,
+                                  GetBuilder<GenresMoviesController>(
+                                    builder: (_) => GenresListHorizontalWidget(
+                                      genresList: _.items,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -163,22 +152,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            GetBuilder<NowPlayingMoviesController>(
-                              builder: (_) => SliverGrid(
-                                delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context, int index) {
-                                    return RecentMovieItemWidget(
-                                      movie: _.items[index],
-                                      genresList: genresList,
-                                    );
-                                  },
-                                  childCount: _.items.length,
-                                ),
-                                gridDelegate:
-                                    SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: screenSize.width / 2,
-                                  crossAxisSpacing: 10,
-                                  childAspectRatio: 1 / 2,
+                            GetBuilder<GenresMoviesController>(
+                              builder: (genres) =>
+                                  GetBuilder<NowPlayingMoviesController>(
+                                builder: (_) => SliverGrid(
+                                  delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                      return RecentMovieItemWidget(
+                                        movie: _.items[index],
+                                        genresList: genres.items,
+                                      );
+                                    },
+                                    childCount: _.items.length,
+                                  ),
+                                  gridDelegate:
+                                      SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: screenSize.width / 2,
+                                    crossAxisSpacing: 10,
+                                    childAspectRatio: 1 / 2,
+                                  ),
                                 ),
                               ),
                             ),
