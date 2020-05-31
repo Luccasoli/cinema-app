@@ -32,10 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Get.lazyPut<TrendingMoviesController>(() => TrendingMoviesController());
-    Get.lazyPut<NowPlayingMoviesController>(() => NowPlayingMoviesController());
-    Get.lazyPut<GenresMoviesController>(() => GenresMoviesController());
-
     _controllers = LinkedScrollControllerGroup();
     _controller1 = _controllers.addAndGet();
     _controller2 = _controllers.addAndGet();
