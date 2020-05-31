@@ -51,11 +51,12 @@ class FilmmakingDetailsWidget extends StatelessWidget {
                   FutureBuilder<Crew>(
                       future: director,
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData)
+                        if (!snapshot.hasData) {
                           return Text(
                             'Carregando...',
                             style: theme.bodyText1,
                           );
+                        }
                         return RichText(
                           text: TextSpan(children: [
                             TextSpan(
@@ -72,11 +73,12 @@ class FilmmakingDetailsWidget extends StatelessWidget {
                   FutureBuilder<List<Crew>>(
                       future: writers,
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData)
+                        if (!snapshot.hasData) {
                           return Text(
                             'Carregando...',
                             style: theme.bodyText1,
                           );
+                        }
                         return RichText(
                           text: TextSpan(children: [
                             TextSpan(

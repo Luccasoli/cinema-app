@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/src/widgets/section_title_widget.dart';
+import 'package:cinema_app/src/shared/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
 class CastSectionWidget extends StatelessWidget {
@@ -24,9 +24,9 @@ class CastSectionWidget extends StatelessWidget {
           future: castList,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Text('Carregando...');
+              return const Text('Carregando...');
             }
-            final CastList castList = snapshot.data;
+            final castList = snapshot.data;
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,19 +35,19 @@ class CastSectionWidget extends StatelessWidget {
                   title: 'Full Cast',
                   color: theme.primaryColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 SizedBox(
                   height: 170,
                   child: ListView.separated(
-                    physics: BouncingScrollPhysics(),
-                    separatorBuilder: (context, index) => SizedBox(
+                    physics: const BouncingScrollPhysics(),
+                    separatorBuilder: (context, index) => const SizedBox(
                       width: 10,
                     ),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, i) => ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 80,
                         minWidth: 80,
                       ),

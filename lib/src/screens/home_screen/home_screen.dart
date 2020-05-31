@@ -1,13 +1,12 @@
-import 'package:cinema_app/models/genres.dart';
-import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/models/now_playing_movies_list.dart';
-import 'package:cinema_app/models/popular_movies_list.dart';
-import 'package:cinema_app/services/api.dart';
 import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
-import 'package:cinema_app/src/widgets/default_padding_widget.dart';
-import 'package:cinema_app/src/widgets/section_title_widget.dart';
-import 'package:cinema_app/src/widgets/status_bar_widget.dart';
+import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
+import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
+import 'package:cinema_app/src/shared/controllers/trending_movies_controller.dart';
+import 'package:cinema_app/src/shared/widgets/default_padding_widget.dart';
+import 'package:cinema_app/src/shared/widgets/section_title_widget.dart';
+import 'package:cinema_app/src/shared/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 import 'widgets/genres_list_horizontal.dart';
@@ -21,10 +20,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Movie> popularMoviesList = [];
-  List<Genres> genresList = [];
-  List<Movie> nowPlayingMoviesList = [];
-
   double height = 230;
   ScrollController _controller1;
   ScrollController _controller2;
@@ -36,26 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _controllers = LinkedScrollControllerGroup();
     _controller1 = _controllers.addAndGet();
     _controller2 = _controllers.addAndGet();
-
-    Future.wait([
-      api.getPopularMovies(),
-      api.getGenresList(),
-      api.getNowPlayingList()
-    ]).then((onValue) => {
-          setState(() {
-            final tempPopularMoviesList = onValue[0] as PopularMoviesList;
-            final tempGenresList = onValue[1] as GenresList;
-            final tempNowPlayingMoviesList = onValue[2] as NowPlayingMoviesList;
-
-            genresList = tempGenresList.genres;
-            popularMoviesList = tempPopularMoviesList.results
-                .where((item) => item.backdropPath != null)
-                .toList();
-            nowPlayingMoviesList = tempNowPlayingMoviesList.results
-                .where((item) => item.posterPath != null)
-                .toList();
-          })
-        });
   }
 
   @override
@@ -66,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          StatusBarWidget(),
+          const StatusBarWidget(),
           Expanded(
             child: Stack(
               children: <Widget>[
@@ -79,14 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         minHeight: 74.5,
                         maxHeight: 200.0,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomRight: Radius.circular(25),
                             bottomLeft: Radius.circular(25),
                           ),
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                constraints: BoxConstraints(minHeight: 74.5),
+                                constraints: const BoxConstraints(
+                                  minHeight: 74.5,
+                                ),
                                 decoration: BoxDecoration(
                                   color: theme.primaryColor,
                                 ),
@@ -97,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   height: 230,
                                   width: 230,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color(0xFF5f5eb7),
                                     shape: BoxShape.circle,
                                   ),
@@ -108,42 +85,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SliverFillRemaining(),
+                    const SliverFillRemaining(),
                   ],
                 ),
                 DefaultPaddingWidget(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      HeaderHomeScreenWidget(),
+                      const HeaderHomeScreenWidget(),
                       Expanded(
                         child: CustomScrollView(
                           slivers: <Widget>[
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  SectionTitleWidget(
-                                    title: 'Trendings',
-                                  ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  TrendingMoviesListHorizontalWidget(
-                                    popularMoviesList: popularMoviesList,
-                                    genresList: genresList,
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  SectionTitleWidget(
-                                    title: 'Category',
-                                    color: theme.accentColor,
-                                    onSeeMoreClick: () {},
-                                  ),
-                                  GenresListHorizontalWidget(
-                                    genresList: genresList,
-                                  ),
-                                ],
+                            GetBuilder<TrendingMoviesController>(
+                              builder: (_) => SliverList(
+                                delegate: SliverChildListDelegate(
+                                  [
+                                    const SectionTitleWidget(
+                                      title: 'Trendings',
+                                    ),
+                                    const SizedBox(
+                                      height: 25,
+                                    ),
+                                    GetBuilder<GenresMoviesController>(
+                                      builder: (genres) =>
+                                          TrendingMoviesListHorizontalWidget(
+                                        popularMoviesList: _.items,
+                                        genresList: genres.items,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    SectionTitleWidget(
+                                      title: 'Category',
+                                      color: theme.accentColor,
+                                      onSeeMoreClick: () {},
+                                    ),
+                                    GetBuilder<GenresMoviesController>(
+                                      builder: (_) =>
+                                          GenresListHorizontalWidget(
+                                        genresList: _.items,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             SliverPersistentHeader(
@@ -161,23 +146,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            SliverGrid(
-                              delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                                  return RecentMovieItemWidget(
-                                    movie: popularMoviesList[index],
-                                    genresList: genresList,
-                                  );
-                                },
-                                childCount: popularMoviesList.length,
+                            GetBuilder<GenresMoviesController>(
+                              builder: (genres) =>
+                                  GetBuilder<NowPlayingMoviesController>(
+                                builder: (_) => SliverGrid(
+                                  delegate: SliverChildBuilderDelegate(
+                                    (context, index) {
+                                      return RecentMovieItemWidget(
+                                        movie: _.items[index],
+                                        genresList: genres.items,
+                                      );
+                                    },
+                                    childCount: _.items.length,
+                                  ),
+                                  gridDelegate:
+                                      SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: screenSize.width / 2,
+                                    crossAxisSpacing: 10,
+                                    childAspectRatio: 1 / 2,
+                                  ),
+                                ),
                               ),
-                              gridDelegate:
-                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: screenSize.width / 2,
-                                crossAxisSpacing: 10,
-                                childAspectRatio: 1 / 2,
-                              ),
-                            )
+                            ),
                           ],
                           controller: _controller1,
                         ),

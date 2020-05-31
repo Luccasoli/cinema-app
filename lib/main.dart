@@ -1,13 +1,14 @@
 import 'package:cinema_app/src/screens/home_screen/home_screen.dart';
-import 'package:cinema_app/src/screens/movie_details_screen/movie_details_screen.dart';
+import 'package:cinema_app/src/screens/home_screen/home_screen_binding.dart';
 import 'package:cinema_app/src/screens/search_screen/search_screen.dart';
 import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'src/screens/movie_details_screen/movie_details_screen.dart';
 
 class Routes {
   static Map<String, GetRoute> namedRoutes = {
-    RoutesPath.Home: GetRoute(page: HomeScreen()),
+    RoutesPath.Home: GetRoute(page: HomeScreen(), binding: HomeScreenBinding()),
     RoutesPath.MovieDetails: GetRoute(page: MovieDetailsScreen()),
     RoutesPath.SearchScreen: GetRoute(page: SearchScreen()),
   };
@@ -22,8 +23,8 @@ void main(List<String> args) {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Color(0xFF4947a7);
-    final accentColor = Color(0xFF483785);
+    final primaryColor = const Color(0xFF4947a7);
+    final accentColor = const Color(0xFF483785);
     return GetMaterialApp(
       initialRoute: RoutesPath.Home,
       namedRoutes: Routes.namedRoutes,

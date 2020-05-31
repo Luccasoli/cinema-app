@@ -5,7 +5,7 @@ import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
 import 'package:dio/dio.dart';
 
-BaseOptions options = new BaseOptions(
+BaseOptions options = BaseOptions(
   baseUrl: "https://api.themoviedb.org",
   connectTimeout: 5000,
   receiveTimeout: 3000,
@@ -21,12 +21,12 @@ class MoviesApi {
 
   Future<PopularMoviesList> getPopularMovies() async {
     try {
-      Response response = await dio.get(
+      var response = await dio.get(
         '/3/movie/popular',
       );
       return PopularMoviesList.fromJson(response.data);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -34,7 +34,7 @@ class MoviesApi {
     String language = 'en-US',
   }) async {
     try {
-      Response response = await dio.get(
+      var response = await dio.get(
         '/3/genre/movie/list',
         queryParameters: {
           "language": language,
@@ -42,7 +42,7 @@ class MoviesApi {
       );
       return GenresList.fromJson(response.data);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -52,7 +52,7 @@ class MoviesApi {
     String region = '',
   }) async {
     try {
-      Response response = await dio.get(
+      var response = await dio.get(
         '/3/movie/now_playing',
         queryParameters: {
           "language": language,
@@ -62,7 +62,7 @@ class MoviesApi {
       );
       return NowPlayingMoviesList.fromJson(response.data);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -70,12 +70,12 @@ class MoviesApi {
     int movieId,
   ) async {
     try {
-      Response response = await dio.get(
+      var response = await dio.get(
         '/3/movie/$movieId/credits',
       );
       return CastList.fromJson(response.data);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -85,7 +85,7 @@ class MoviesApi {
     String appendToResponse = 'videos',
   }) async {
     try {
-      Response response = await dio.get(
+      var response = await dio.get(
         '/3/movie/$movieId',
         queryParameters: {
           "language": language,
@@ -94,7 +94,7 @@ class MoviesApi {
       );
       return MovieDetailsModel.fromJson(response.data);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 }

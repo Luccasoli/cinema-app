@@ -1,5 +1,5 @@
 import 'package:cinema_app/models/movie.dart';
-import 'package:cinema_app/src/widgets/section_title_widget.dart';
+import 'package:cinema_app/src/shared/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
 class StorylineSectionWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class StorylineSectionWidget extends StatelessWidget {
             title: 'Storyline',
             color: theme.primaryColor,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(movie.overview),
