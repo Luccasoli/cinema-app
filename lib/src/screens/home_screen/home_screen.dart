@@ -102,39 +102,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: CustomScrollView(
                           slivers: <Widget>[
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  SectionTitleWidget(
-                                    title: 'Trendings',
-                                  ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  GetBuilder<GenresMoviesController>(
-                                    builder: (genres) =>
-                                        GetBuilder<TrendingMoviesController>(
-                                      builder: (_) =>
+                            GetBuilder<TrendingMoviesController>(
+                              builder: (_) => SliverList(
+                                delegate: SliverChildListDelegate(
+                                  [
+                                    SectionTitleWidget(
+                                      title: 'Trendings',
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    GetBuilder<GenresMoviesController>(
+                                      builder: (genres) =>
                                           TrendingMoviesListHorizontalWidget(
                                         popularMoviesList: _.items,
                                         genresList: genres.items,
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  SectionTitleWidget(
-                                    title: 'Category',
-                                    color: theme.accentColor,
-                                    onSeeMoreClick: () {},
-                                  ),
-                                  GetBuilder<GenresMoviesController>(
-                                    builder: (_) => GenresListHorizontalWidget(
-                                      genresList: _.items,
+                                    SizedBox(
+                                      height: 30,
                                     ),
-                                  ),
-                                ],
+                                    SectionTitleWidget(
+                                      title: 'Category',
+                                      color: theme.accentColor,
+                                      onSeeMoreClick: () {},
+                                    ),
+                                    GetBuilder<GenresMoviesController>(
+                                      builder: (_) =>
+                                          GenresListHorizontalWidget(
+                                        genresList: _.items,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             SliverPersistentHeader(
