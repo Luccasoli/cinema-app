@@ -88,54 +88,62 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SliverFillRemaining(),
                   ],
                 ),
-                DefaultPaddingWidget(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const HeaderHomeScreenWidget(),
-                      Expanded(
-                        child: CustomScrollView(
-                          slivers: <Widget>[
-                            GetBuilder<TrendingMoviesController>(
-                              builder: (_) => SliverList(
-                                delegate: SliverChildListDelegate(
-                                  [
-                                    const SectionTitleWidget(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    DefaultPaddingWidget(
+                      child: const HeaderHomeScreenWidget(),
+                    ),
+                    Expanded(
+                      child: CustomScrollView(
+                        slivers: <Widget>[
+                          GetBuilder<TrendingMoviesController>(
+                            builder: (_) => SliverList(
+                              delegate: SliverChildListDelegate(
+                                [
+                                  DefaultPaddingWidget(
+                                    child: const SectionTitleWidget(
                                       title: 'Trendings',
                                     ),
-                                    const SizedBox(
-                                      height: 25,
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  GetBuilder<GenresMoviesController>(
+                                    builder: (genres) =>
+                                        TrendingMoviesListHorizontalWidget(
+                                      popularMoviesList: _.items,
+                                      genresList: genres.items,
                                     ),
-                                    GetBuilder<GenresMoviesController>(
-                                      builder: (genres) =>
-                                          TrendingMoviesListHorizontalWidget(
-                                        popularMoviesList: _.items,
-                                        genresList: genres.items,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    SectionTitleWidget(
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  DefaultPaddingWidget(
+                                    child: SectionTitleWidget(
                                       title: 'Category',
                                       color: theme.accentColor,
                                       onSeeMoreClick: () {},
                                     ),
-                                    GetBuilder<GenresMoviesController>(
+                                  ),
+                                  DefaultPaddingWidget(
+                                    child: GetBuilder<GenresMoviesController>(
                                       builder: (_) =>
                                           GenresListHorizontalWidget(
                                         genresList: _.items,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SliverPersistentHeader(
-                              pinned: true,
-                              delegate: SliverAppBarDelegate(
-                                minHeight: 50.0,
-                                maxHeight: 50.0,
+                          ),
+                          SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SliverAppBarDelegate(
+                              minHeight: 50.0,
+                              maxHeight: 50.0,
+                              child: DefaultPaddingWidget(
                                 child: Container(
                                   alignment: Alignment.centerLeft,
                                   color: theme.scaffoldBackgroundColor,
@@ -146,7 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            GetBuilder<GenresMoviesController>(
+                          ),
+                          DefaultPaddingWidget(
+                            isSliver: true,
+                            child: GetBuilder<GenresMoviesController>(
                               builder: (genres) =>
                                   GetBuilder<NowPlayingMoviesController>(
                                 builder: (_) => SliverGrid(
@@ -168,12 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                          ],
-                          controller: _controller1,
-                        ),
+                          ),
+                        ],
+                        controller: _controller1,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

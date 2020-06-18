@@ -28,7 +28,8 @@ class RecentMovieItemWidget extends StatelessWidget {
               });
             },
             child: Image.network(
-              'https://image.tmdb.org/t/p/w500/${movie.posterPath}',
+              'https://image.tmdb.org/t/p/w342/${movie.posterPath}',
+              fit: BoxFit.cover,
             ),
           ),
         ),

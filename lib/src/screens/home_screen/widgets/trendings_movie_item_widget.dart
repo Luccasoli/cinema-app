@@ -35,7 +35,9 @@ class TrendingsMovieItemWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Image.network(
-                  'https://image.tmdb.org/t/p/w500/${movieItem.backdropPath}',
+                  'https://image.tmdb.org/t/p/w300/${movieItem.backdropPath}',
+                  height: 500,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
