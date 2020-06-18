@@ -16,6 +16,7 @@ class GenreListChipsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListView.separated(
+        padding: const EdgeInsets.only(left: 20),
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, i) => const SizedBox(
               width: 10,

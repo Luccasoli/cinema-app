@@ -17,6 +17,7 @@ class GenresListHorizontalWidget extends StatelessWidget {
     return SizedBox(
       height: 80,
       child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, i) => const SizedBox(
           width: 25,

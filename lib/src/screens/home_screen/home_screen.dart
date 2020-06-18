@@ -91,12 +91,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    DefaultPaddingWidget(
-                      child: const HeaderHomeScreenWidget(),
-                    ),
                     Expanded(
                       child: CustomScrollView(
                         slivers: <Widget>[
+                          SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SliverAppBarDelegate(
+                              minHeight: 74.5,
+                              maxHeight: 7.0,
+                              child: const HeaderHomeScreenWidget(),
+                            ),
+                          ),
                           GetBuilder<TrendingMoviesController>(
                             builder: (_) => SliverList(
                               delegate: SliverChildListDelegate(
@@ -126,12 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onSeeMoreClick: () {},
                                     ),
                                   ),
-                                  DefaultPaddingWidget(
-                                    child: GetBuilder<GenresMoviesController>(
-                                      builder: (_) =>
-                                          GenresListHorizontalWidget(
-                                        genresList: _.items,
-                                      ),
+                                  GetBuilder<GenresMoviesController>(
+                                    builder: (_) => GenresListHorizontalWidget(
+                                      genresList: _.items,
                                     ),
                                   ),
                                 ],

@@ -79,6 +79,7 @@ class _HeaderMovieDetailsScreenWidgetState
               child: Image.network(
                 'https://image.tmdb.org/t/p/w500/${widget.movie.backdropPath}',
                 fit: BoxFit.cover,
+                height: 200,
               ),
             ),
           ),
@@ -126,7 +127,6 @@ class _HeaderMovieDetailsScreenWidgetState
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
                     vertical: 10,
                   ),
                   child: Row(
@@ -140,9 +140,13 @@ class _HeaderMovieDetailsScreenWidgetState
                               child: SingleChildScrollView(
                                 reverse: true,
                                 physics: const BouncingScrollPhysics(),
-                                child: MovieTitleAndReleaseDateWidget(
-                                  movieItem: widget.movie,
-                                  fontSize: fontSize,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: MovieTitleAndReleaseDateWidget(
+                                    movieItem: widget.movie,
+                                    fontSize: fontSize,
+                                  ),
                                 ),
                               ),
                             ),
@@ -155,7 +159,8 @@ class _HeaderMovieDetailsScreenWidgetState
                                     );
                                   }
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 4.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 4.0, left: 20, right: 20),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -198,57 +203,61 @@ class _HeaderMovieDetailsScreenWidgetState
                       const SizedBox(
                         width: 15,
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: FutureBuilder<MovieDetailsModel>(
-                            future: movieDetailed,
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) {
-                                return const SizedBox(
-                                  height: 45,
-                                  width: 45,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: FutureBuilder<MovieDetailsModel>(
+                              future: movieDetailed,
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const SizedBox(
+                                    height: 45,
+                                    width: 45,
+                                  );
+                                }
+                                var boxShadow2 = BoxShadow(
+                                  color:
+                                      const Color(0xFFff7652).withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 7,
                                 );
-                              }
-                              var boxShadow2 = BoxShadow(
-                                color: const Color(0xFFff7652).withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 7,
-                              );
-                              return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _youtubeController =
-                                        YoutubePlayerController(
-                                      initialVideoId:
-                                          snapshot.data.videos.results[0].key,
-                                      flags: const YoutubePlayerFlags(
-                                        autoPlay: true,
-                                        mute: false,
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _youtubeController =
+                                          YoutubePlayerController(
+                                        initialVideoId:
+                                            snapshot.data.videos.results[0].key,
+                                        flags: const YoutubePlayerFlags(
+                                          autoPlay: true,
+                                          mute: false,
+                                        ),
+                                      );
+                                      playTrailer = true;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 45,
+                                    width: 45,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        boxShadow2,
+                                      ],
+                                      color: const Color(0xFFff7652),
+                                      borderRadius: BorderRadius.circular(
+                                        30,
                                       ),
-                                    );
-                                    playTrailer = true;
-                                  });
-                                },
-                                child: Container(
-                                  height: 45,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      boxShadow2,
-                                    ],
-                                    color: const Color(0xFFff7652),
-                                    borderRadius: BorderRadius.circular(
-                                      30,
+                                    ),
+                                    child: Icon(
+                                      Icons.play_arrow,
+                                      size: 30,
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  child: Icon(
-                                    Icons.play_arrow,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              );
-                            }),
+                                );
+                              }),
+                        ),
                       )
                     ],
                   ),

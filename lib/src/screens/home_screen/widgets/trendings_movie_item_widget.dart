@@ -59,16 +59,17 @@ class TrendingsMovieItemWidget extends StatelessWidget {
             ),
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.7,
+                maxWidth: MediaQuery.of(context).size.width * 0.8,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Expanded(
                       flex: 2,
                       child: SingleChildScrollView(
+                        padding: const EdgeInsets.only(left: 20),
                         child: MovieTitleAndReleaseDateWidget(
                           movieItem: movieItem,
                           fontSize: fontSize,
