@@ -21,7 +21,7 @@ class TrendingsMovieItemWidget extends StatelessWidget {
     final fontSize = MediaQuery.of(context).size.width * 0.05;
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesPath.MovieDetails, arguments: {
+        Get.toNamed(RoutesPath.movieDetails, arguments: {
           'movie': movieItem,
           'genresList': genresList,
         });

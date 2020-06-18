@@ -3,6 +3,7 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie_details_model.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
 import 'package:cinema_app/models/popular_movies_list.dart';
+import 'package:cinema_app/utils/constants.dart';
 import 'package:dio/dio.dart';
 
 BaseOptions options = BaseOptions(
@@ -10,14 +11,13 @@ BaseOptions options = BaseOptions(
   connectTimeout: 5000,
   receiveTimeout: 3000,
   headers: {
-    'Authorization': 'Bearer ${MoviesApi.API_KEY}',
+    'Authorization': 'Bearer ${MoviesApi.apiKey}',
   },
 );
 
 class MoviesApi {
   Dio dio = Dio(options);
-  static const String API_KEY =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWM5NDNmYjNjNTNlMzFkODEzN2Q2ZjNhNGVlNzhmOSIsInN1YiI6IjVlMGJkMzljODU4Njc4MDAxOGJkZGVjMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WX7xg2aVGFUSto3KCGwkpnLkBADtYNszLWwVr4OC1Ro';
+  static const String apiKey = movieDbKey;
 
   Future<PopularMoviesList> getPopularMovies() async {
     try {
@@ -25,7 +25,7 @@ class MoviesApi {
         '/3/movie/popular',
       );
       return PopularMoviesList.fromJson(response.data);
-    } catch (error) {
+    } on Exception {
       rethrow;
     }
   }
@@ -41,7 +41,7 @@ class MoviesApi {
         },
       );
       return GenresList.fromJson(response.data);
-    } catch (error) {
+    } on Exception {
       rethrow;
     }
   }
@@ -61,7 +61,7 @@ class MoviesApi {
         },
       );
       return NowPlayingMoviesList.fromJson(response.data);
-    } catch (error) {
+    } on Exception {
       rethrow;
     }
   }
@@ -74,7 +74,7 @@ class MoviesApi {
         '/3/movie/$movieId/credits',
       );
       return CastList.fromJson(response.data);
-    } catch (error) {
+    } on Exception {
       rethrow;
     }
   }
@@ -93,7 +93,7 @@ class MoviesApi {
         },
       );
       return MovieDetailsModel.fromJson(response.data);
-    } catch (error) {
+    } on Exception {
       rethrow;
     }
   }

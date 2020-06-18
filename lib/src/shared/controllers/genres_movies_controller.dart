@@ -11,7 +11,7 @@ class GenresMoviesController extends GetController {
       final result = await api.getGenresList();
       items = result.genres;
       update(this);
-    } catch (e) {}
+    } on Exception {}
     super.onInit();
   }
 }

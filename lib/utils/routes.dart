@@ -1,5 +1,5 @@
 class RoutesPath {
-  static const Home = '/';
-  static const MovieDetails = '/movie-details';
-  static const SearchScreen = '/search';
+  static const home = '/';
+  static const movieDetails = '/movie-details';
+  static const searchScreen = '/search';
 }

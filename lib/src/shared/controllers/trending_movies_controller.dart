@@ -12,7 +12,7 @@ class TrendingMoviesController extends GetController {
       items =
           result.results.where((item) => item.backdropPath != null).toList();
       update(this);
-    } catch (e) {}
+    } on Exception {}
     super.onInit();
   }
 }

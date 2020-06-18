@@ -8,9 +8,9 @@ import 'src/screens/movie_details_screen/movie_details_screen.dart';
 
 class Routes {
   static Map<String, GetRoute> namedRoutes = {
-    RoutesPath.Home: GetRoute(page: HomeScreen(), binding: HomeScreenBinding()),
-    RoutesPath.MovieDetails: GetRoute(page: MovieDetailsScreen()),
-    RoutesPath.SearchScreen: GetRoute(page: SearchScreen()),
+    RoutesPath.home: GetRoute(page: HomeScreen(), binding: HomeScreenBinding()),
+    RoutesPath.movieDetails: GetRoute(page: MovieDetailsScreen()),
+    RoutesPath.searchScreen: GetRoute(page: SearchScreen()),
   };
 }
 
@@ -26,7 +26,7 @@ class Main extends StatelessWidget {
     final primaryColor = const Color(0xFF4947a7);
     final accentColor = const Color(0xFF483785);
     return GetMaterialApp(
-      initialRoute: RoutesPath.Home,
+      initialRoute: RoutesPath.home,
       namedRoutes: Routes.namedRoutes,
       debugShowCheckedModeBanner: false,
       title: 'Cinema App',

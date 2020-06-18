@@ -22,7 +22,7 @@ class RecentMovieItemWidget extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(25),
             onTap: () {
-              Get.toNamed(RoutesPath.MovieDetails, arguments: {
+              Get.toNamed(RoutesPath.movieDetails, arguments: {
                 'movie': movie,
                 'genresList': genresList,
               });

@@ -30,7 +30,7 @@ class HeaderHomeScreenWidget extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed(RoutesPath.SearchScreen);
+                    Get.toNamed(RoutesPath.searchScreen);
                   },
                   child: SearchBarWidget(
                     enabled: false,
