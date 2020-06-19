@@ -11,7 +11,7 @@ class NowPlayingMoviesController extends GetController {
       final result = await api.getNowPlayingList();
       items =
           result.results.where((item) => item.backdropPath != null).toList();
-      update(this);
+      update();
     } on Exception {}
     super.onInit();
   }

@@ -7,11 +7,14 @@ import 'package:get/get.dart';
 import 'src/screens/movie_details_screen/movie_details_screen.dart';
 
 class Routes {
-  static Map<String, GetRoute> namedRoutes = {
-    RoutesPath.home: GetRoute(page: HomeScreen(), binding: HomeScreenBinding()),
-    RoutesPath.movieDetails: GetRoute(page: MovieDetailsScreen()),
-    RoutesPath.searchScreen: GetRoute(page: SearchScreen()),
-  };
+  static final List<GetPage> namedRoutes = [
+    GetPage(
+        name: RoutesPath.home,
+        page: () => HomeScreen(),
+        binding: HomeScreenBinding()),
+    GetPage(name: RoutesPath.movieDetails, page: () => MovieDetailsScreen()),
+    GetPage(name: RoutesPath.searchScreen, page: () => SearchScreen()),
+  ];
 }
 
 void main(List<String> args) {
@@ -27,13 +30,17 @@ class Main extends StatelessWidget {
     final accentColor = const Color(0xFF483785);
     return GetMaterialApp(
       initialRoute: RoutesPath.home,
-      namedRoutes: Routes.namedRoutes,
+      getPages: Routes.namedRoutes,
       debugShowCheckedModeBanner: false,
       title: 'Cinema App',
       theme: ThemeData(
         primaryColor: primaryColor,
         accentColor: accentColor,
         textTheme: ThemeData().textTheme.copyWith(
+              headline4: ThemeData().textTheme.headline4.copyWith(
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
               headline6: ThemeData().textTheme.headline6.copyWith(
                     color: accentColor,
                   ),

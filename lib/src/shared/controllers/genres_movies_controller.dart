@@ -10,7 +10,7 @@ class GenresMoviesController extends GetController {
     try {
       final result = await api.getGenresList();
       items = result.genres;
-      update(this);
+      update();
     } on Exception {}
     super.onInit();
   }

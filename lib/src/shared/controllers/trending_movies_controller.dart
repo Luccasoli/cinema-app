@@ -11,7 +11,7 @@ class TrendingMoviesController extends GetController {
       final result = await api.getPopularMovies();
       items =
           result.results.where((item) => item.backdropPath != null).toList();
-      update(this);
+      update();
     } on Exception {}
     super.onInit();
   }
