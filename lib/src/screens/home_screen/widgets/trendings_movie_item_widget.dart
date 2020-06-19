@@ -23,7 +23,6 @@ class TrendingsMovieItemWidget extends StatelessWidget {
       onTap: () {
         Get.toNamed(RoutesPath.movieDetails, arguments: {
           'movie': movieItem,
-          'genresList': genresList,
         });
       },
       child: ClipRRect(
@@ -79,7 +78,6 @@ class TrendingsMovieItemWidget extends StatelessWidget {
                     Expanded(
                       child: GenreListChipsWidget(
                         movieItem: movieItem,
-                        genresList: genresList,
                       ),
                     ),
                   ],

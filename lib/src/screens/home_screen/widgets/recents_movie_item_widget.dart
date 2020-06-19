@@ -24,7 +24,6 @@ class RecentMovieItemWidget extends StatelessWidget {
             onTap: () {
               Get.toNamed(RoutesPath.movieDetails, arguments: {
                 'movie': movie,
-                'genresList': genresList,
               });
             },
             child: Image.network(

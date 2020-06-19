@@ -194,7 +194,6 @@ class _HeaderMovieDetailsScreenWidgetState
                             Expanded(
                               child: GenreListChipsWidget(
                                 movieItem: widget.movie,
-                                genresList: widget.genresList,
                               ),
                             ),
                           ],
