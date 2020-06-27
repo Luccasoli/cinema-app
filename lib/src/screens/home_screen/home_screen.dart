@@ -1,3 +1,4 @@
+import 'package:cinema_app/src/screens/home_screen/controllers/scroll_animation_controller.dart';
 import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
@@ -7,35 +8,18 @@ import 'package:cinema_app/src/shared/widgets/section_title_widget.dart';
 import 'package:cinema_app/src/shared/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 import 'widgets/genres_list_horizontal.dart';
 import 'widgets/recents_movie_item_widget.dart';
 import 'widgets/sliver_app_delegate.dart';
 import 'widgets/trending_movies_horizontal_list_widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
+  final double height = 230;
   final GenresMoviesController genresController = Get.find();
   final TrendingMoviesController trendingMoviesController = Get.find();
   final NowPlayingMoviesController nowPlayingMoviesController = Get.find();
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  double height = 230;
-  ScrollController _controller1;
-  ScrollController _controller2;
-  LinkedScrollControllerGroup _controllers;
-
-  @override
-  void initState() {
-    super.initState();
-    _controllers = LinkedScrollControllerGroup();
-    _controller1 = _controllers.addAndGet();
-    _controller2 = _controllers.addAndGet();
-  }
+  final ScrollAnimationController scrollAnimationController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -49,48 +33,37 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Stack(
               children: <Widget>[
-                CustomScrollView(
-                  controller: _controller2,
-                  slivers: <Widget>[
-                    SliverPersistentHeader(
-                      pinned: true,
-                      delegate: SliverAppBarDelegate(
-                        minHeight: 74.5,
-                        maxHeight: 200.0,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(25),
-                            bottomLeft: Radius.circular(25),
-                          ),
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minHeight: 74.5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: theme.primaryColor,
-                                ),
-                              ),
-                              Positioned(
-                                top: -70,
-                                right: -50,
-                                child: Container(
-                                  height: 230,
-                                  width: 230,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF5f5eb7),
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                            ],
+                Obx(
+                  () => AnimatedContainer(
+                    duration: const Duration(seconds: 0),
+                    height: scrollAnimationController.value.value,
+                    width: double.infinity,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: theme.primaryColor,
+                            borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(25),
+                              bottomLeft: Radius.circular(25),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          top: -70,
+                          right: -50,
+                          child: Container(
+                            height: 230,
+                            width: 230,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF5f5eb7),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SliverFillRemaining(),
-                  ],
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,10 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Obx(
                                     () => TrendingMoviesListHorizontalWidget(
-                                      popularMoviesList: widget
-                                          .trendingMoviesController.items.value,
-                                      genresList:
-                                          widget.genresController.items.value,
+                                      popularMoviesList:
+                                          trendingMoviesController.items.value,
+                                      genresList: genresController.items.value,
                                     ),
                                   ),
                                   const SizedBox(
@@ -138,8 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Obx(
                                     () => GenresListHorizontalWidget(
-                                      genresList:
-                                          widget.genresController.items.value,
+                                      genresList: genresController.items.value,
                                     ),
                                   ),
                                 ],
@@ -171,16 +142,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   delegate: SliverChildBuilderDelegate(
                                     (context, index) {
                                       return RecentMovieItemWidget(
-                                        movie: widget.nowPlayingMoviesController
+                                        movie: nowPlayingMoviesController
                                             .items[index],
                                         genresList:
-                                            widget.genresController.items.value,
+                                            genresController.items.value,
                                       );
                                     },
-                                    childCount: widget
-                                        .nowPlayingMoviesController
-                                        .items
-                                        .length,
+                                    childCount:
+                                        nowPlayingMoviesController.items.length,
                                   ),
                                   gridDelegate:
                                       SliverGridDelegateWithMaxCrossAxisExtent(
@@ -193,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )
                         ],
-                        controller: _controller1,
+                        controller: scrollAnimationController.scrollController,
                       ),
                     ),
                   ],
