@@ -15,6 +15,10 @@ import 'widgets/sliver_app_delegate.dart';
 import 'widgets/trending_movies_horizontal_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
+  final GenresMoviesController genresController = Get.find();
+  final TrendingMoviesController trendingMoviesController = Get.find();
+  final NowPlayingMoviesController nowPlayingMoviesController = Get.find();
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -102,8 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: const HeaderHomeScreenWidget(),
                             ),
                           ),
-                          GetBuilder<TrendingMoviesController>(
-                            builder: (_) => SliverList(
+                          Obx(
+                            () => SliverList(
                               delegate: SliverChildListDelegate(
                                 [
                                   DefaultPaddingWidget(
@@ -114,11 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const SizedBox(
                                     height: 25,
                                   ),
-                                  GetBuilder<GenresMoviesController>(
-                                    builder: (genres) =>
-                                        TrendingMoviesListHorizontalWidget(
-                                      popularMoviesList: _.items,
-                                      genresList: genres.items,
+                                  Obx(
+                                    () => TrendingMoviesListHorizontalWidget(
+                                      popularMoviesList: widget
+                                          .trendingMoviesController.items.value,
+                                      genresList:
+                                          widget.genresController.items.value,
                                     ),
                                   ),
                                   const SizedBox(
@@ -131,9 +136,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onSeeMoreClick: () {},
                                     ),
                                   ),
-                                  GetBuilder<GenresMoviesController>(
-                                    builder: (_) => GenresListHorizontalWidget(
-                                      genresList: _.items,
+                                  Obx(
+                                    () => GenresListHorizontalWidget(
+                                      genresList:
+                                          widget.genresController.items.value,
                                     ),
                                   ),
                                 ],
@@ -159,18 +165,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           DefaultPaddingWidget(
                             isSliver: true,
-                            child: GetBuilder<GenresMoviesController>(
-                              builder: (genres) =>
-                                  GetBuilder<NowPlayingMoviesController>(
-                                builder: (_) => SliverGrid(
+                            child: Obx(
+                              () => Obx(
+                                () => SliverGrid(
                                   delegate: SliverChildBuilderDelegate(
                                     (context, index) {
                                       return RecentMovieItemWidget(
-                                        movie: _.items[index],
-                                        genresList: genres.items,
+                                        movie: widget.nowPlayingMoviesController
+                                            .items[index],
+                                        genresList:
+                                            widget.genresController.items.value,
                                       );
                                     },
-                                    childCount: _.items.length,
+                                    childCount: widget
+                                        .nowPlayingMoviesController
+                                        .items
+                                        .length,
                                   ),
                                   gridDelegate:
                                       SliverGridDelegateWithMaxCrossAxisExtent(
@@ -181,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                         controller: _controller1,
                       ),

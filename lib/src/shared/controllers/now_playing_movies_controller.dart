@@ -3,15 +3,15 @@ import 'package:cinema_app/services/api.dart';
 import 'package:get/get.dart';
 
 class NowPlayingMoviesController extends GetxController {
-  List<Movie> items = [];
+  final RxList<Movie> items = List<Movie>().obs;
 
   @override
   void onInit() async {
     try {
       final result = await api.getNowPlayingList();
-      items =
-          result.results.where((item) => item.backdropPath != null).toList();
-      update();
+      items.assignAll(
+        result.results.where((item) => item.backdropPath != null).toList(),
+      );
     } on Exception {}
     super.onInit();
   }
