@@ -2,7 +2,7 @@ import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:get/get.dart';
 
-class GenresMoviesController extends GetController {
+class GenresMoviesController extends GetxController {
   List<Genres> items = [];
 
   @override

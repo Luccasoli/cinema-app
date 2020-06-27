@@ -2,7 +2,7 @@ import 'package:cinema_app/models/movie.dart';
 import 'package:cinema_app/services/api.dart';
 import 'package:get/get.dart';
 
-class TrendingMoviesController extends GetController {
+class TrendingMoviesController extends GetxController {
   List<Movie> items = [];
 
   @override
