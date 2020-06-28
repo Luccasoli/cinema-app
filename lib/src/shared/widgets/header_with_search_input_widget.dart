@@ -4,9 +4,16 @@ import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HeaderHomeScreenWidget extends StatelessWidget {
-  const HeaderHomeScreenWidget({
+class HeaderWithSearchInputWidget extends StatelessWidget {
+  final bool isInputEnabled;
+  final String initialValue;
+  final void Function(String) onChanged;
+
+  const HeaderWithSearchInputWidget({
     Key key,
+    this.isInputEnabled = false,
+    this.initialValue,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -68,7 +75,9 @@ class HeaderHomeScreenWidget extends StatelessWidget {
                               Get.toNamed(RoutesPath.searchScreen);
                             },
                             child: SearchBarWidget(
-                              enabled: false,
+                              enabled: isInputEnabled,
+                              initialValue: initialValue,
+                              onChanged: onChanged,
                             ),
                           ),
                         ),

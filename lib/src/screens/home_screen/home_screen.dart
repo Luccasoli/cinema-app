@@ -1,9 +1,10 @@
 import 'package:cinema_app/src/screens/home_screen/controllers/scroll_animation_controller.dart';
-import 'package:cinema_app/src/screens/home_screen/widgets/header_home_screen_widget.dart';
 import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/now_playing_movies_controller.dart';
 import 'package:cinema_app/src/shared/controllers/trending_movies_controller.dart';
+import 'package:cinema_app/src/shared/widgets/background_animated_container.dart';
 import 'package:cinema_app/src/shared/widgets/default_padding_widget.dart';
+import 'package:cinema_app/src/shared/widgets/header_with_search_input_widget.dart';
 import 'package:cinema_app/src/shared/widgets/section_title_widget.dart';
 import 'package:cinema_app/src/shared/widgets/status_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,37 +34,8 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: Stack(
               children: <Widget>[
-                Obx(
-                  () => AnimatedContainer(
-                    duration: const Duration(seconds: 0),
-                    height: scrollAnimationController.value.value,
-                    width: double.infinity,
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: theme.primaryColor,
-                            borderRadius: const BorderRadius.only(
-                              bottomRight: Radius.circular(25),
-                              bottomLeft: Radius.circular(25),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: -70,
-                          right: -50,
-                          child: Container(
-                            height: 230,
-                            width: 230,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF5f5eb7),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                BackgroundAnimatedContainer(
+                  scrollAnimationController: scrollAnimationController,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                             delegate: SliverAppBarDelegate(
                               minHeight: 74.5,
                               maxHeight: 7.0,
-                              child: const HeaderHomeScreenWidget(),
+                              child: const HeaderWithSearchInputWidget(),
                             ),
                           ),
                           Obx(
