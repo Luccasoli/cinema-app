@@ -2,7 +2,7 @@ import 'package:cinema_app/models/cast.dart';
 import 'package:cinema_app/models/genres.dart';
 import 'package:cinema_app/models/movie_details_model.dart';
 import 'package:cinema_app/models/now_playing_movies_list.dart';
-import 'package:cinema_app/models/popular_movies_list.dart';
+import 'package:cinema_app/models/movies_list.dart';
 import 'package:cinema_app/utils/constants.dart';
 import 'package:dio/dio.dart';
 
@@ -19,12 +19,43 @@ class MoviesApi {
   Dio dio = Dio(options);
   static const String apiKey = movieDbKey;
 
-  Future<PopularMoviesList> getPopularMovies() async {
+  Future<MoviesList> getPopularMovies({
+    String language = 'en-US',
+    int page = 1,
+    String region = '',
+  }) async {
     try {
       var response = await dio.get(
         '/3/movie/popular',
       );
-      return PopularMoviesList.fromJson(response.data);
+      return MoviesList.fromJson(response.data);
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<MoviesList> searchMovies(
+    String query, {
+    String language = 'en-US',
+    int page = 1,
+    String region = '',
+    bool includeAdult = false,
+    int year,
+    int primaryReleaseYear,
+  }) async {
+    try {
+      var response = await dio.get(
+        '/3/search/movie',
+        queryParameters: {
+          "language": language,
+          "page": page,
+          "region": region,
+          "include_adult": includeAdult,
+          "year": year,
+          "primary_release_year": primaryReleaseYear,
+        },
+      );
+      return MoviesList.fromJson(response.data);
     } on Exception {
       rethrow;
     }

@@ -1,38 +1,28 @@
-import 'movie.dart';
+import 'package:cinema_app/models/movies_list.dart';
 
-class NowPlayingMoviesList {
-  int page;
-  List<Movie> results;
+class NowPlayingMoviesList extends MoviesList {
   Dates dates;
-  int totalPages;
-  int totalResults;
 
   NowPlayingMoviesList({page, results, dates, totalPages, totalResults});
 
-  NowPlayingMoviesList.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
-    if (json['results'] != null) {
-      results = List<Movie>();
-      json['results'].forEach((v) {
-        results.add(Movie.fromJson(v));
-      });
-    }
+  @override
+  NowPlayingMoviesList.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json) {
     dates = json['dates'] != null ? Dates.fromJson(json['dates']) : null;
-    totalPages = json['total_pages'];
-    totalResults = json['total_results'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['page'] = page;
     if (results != null) {
       data['results'] = results.map((v) => v.toJson()).toList();
     }
+    data['total_pages'] = totalPages;
+    data['total_results'] = totalResults;
     if (dates != null) {
       data['dates'] = dates.toJson();
     }
-    data['total_pages'] = totalPages;
-    data['total_results'] = totalResults;
     return data;
   }
 }

@@ -1,14 +1,14 @@
 import 'movie.dart';
 
-class PopularMoviesList {
+class MoviesList {
   int page;
-  int totalResults;
-  int totalPages;
   List<Movie> results;
+  int totalPages;
+  int totalResults;
 
-  PopularMoviesList({page, totalResults, totalPages, results});
+  MoviesList({page, totalResults, totalPages, results});
 
-  PopularMoviesList.fromJson(Map<String, dynamic> json) {
+  MoviesList.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     totalResults = json['total_results'];
     totalPages = json['total_pages'];
