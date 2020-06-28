@@ -1,4 +1,5 @@
-import 'package:cinema_app/src/shared/controllers/genres_movies_controller.dart';
+import 'package:cinema_app/services/api.dart';
+import 'package:cinema_app/src/screens/search_screen/controllers/search_movies_controller.dart';
 import 'package:get/get.dart';
 
 class SearchInputController extends GetxController {
@@ -11,9 +12,15 @@ class SearchInputController extends GetxController {
     super.onInit();
     debounce(
       _search,
-      (_) {
-        print('Debounce: $search');
-        print(Get.find<GenresMoviesController>().items.value);
+      (_) async {
+        try {
+          final result = await api.searchMovies(search);
+          Get.find<SearchMoviesController>().items = result.results
+              .where((item) => item.backdropPath != null)
+              .toList();
+        } catch (e) {
+          print(e);
+        }
       },
       time: const Duration(
         seconds: 1,

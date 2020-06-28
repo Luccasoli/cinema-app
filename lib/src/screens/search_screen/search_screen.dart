@@ -1,5 +1,6 @@
 import 'package:cinema_app/src/screens/search_screen/controllers/scroll_animation_controller_search_screen.dart';
 import 'package:cinema_app/src/screens/search_screen/controllers/search_input_controller.dart';
+import 'package:cinema_app/src/screens/search_screen/controllers/search_movies_controller.dart';
 import 'package:cinema_app/src/screens/search_screen/widgets/movie_item_search_screen.dart';
 import 'package:cinema_app/src/shared/widgets/background_animated_container.dart';
 import 'package:cinema_app/src/shared/widgets/header_with_search_input_widget.dart';
@@ -8,10 +9,10 @@ import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../shared/controllers/trending_movies_controller.dart';
-
 class SearchScreen extends StatelessWidget {
-  final TrendingMoviesController trendingMoviesController = Get.find();
+  final SearchMoviesController searchMoviesController = Get.put(
+    SearchMoviesController(),
+  );
   final ScrollAnimationControllerSearchScreen scrollAnimationController =
       Get.put(
     ScrollAnimationControllerSearchScreen(),
@@ -48,15 +49,15 @@ class SearchScreen extends StatelessWidget {
                               onTap: () => Get.toNamed(
                                 RoutesPath.movieDetails,
                                 arguments: {
-                                  'movie': trendingMoviesController.items[index]
+                                  'movie': searchMoviesController.items[index]
                                 },
                               ),
                               child: MovieItemSearchScreen(
-                                movie: trendingMoviesController.items[index],
+                                movie: searchMoviesController.items[index],
                               ),
                             );
                           },
-                          itemCount: trendingMoviesController.items.length,
+                          itemCount: searchMoviesController.items.length,
                         ),
                       ),
                     ),

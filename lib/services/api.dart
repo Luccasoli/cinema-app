@@ -47,6 +47,7 @@ class MoviesApi {
       var response = await dio.get(
         '/3/search/movie',
         queryParameters: {
+          "query": query,
           "language": language,
           "page": page,
           "region": region,
