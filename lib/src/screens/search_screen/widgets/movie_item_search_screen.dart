@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinema_app/src/shared/widgets/genre_list_chips_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -51,45 +52,44 @@ class MovieItemSearchScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       vertical: 30.0,
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text(
+                            child: AutoSizeText(
                               movie.title,
                               style: theme.textTheme.headline4,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                              vertical: 20,
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.star),
-                                const Expanded(
-                                  child: Text('8.7/10 IMDb 3h 2min'),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 20,
                           ),
-                          SizedBox(
-                            height: 50,
-                            child: GenreListChipsWidget(
-                              movieItem: movie,
-                              backgroundColorChip:
-                                  theme.primaryColor.withOpacity(0.1),
-                              fontColorChip:
-                                  theme.primaryColor.withOpacity(0.45),
-                            ),
-                          )
-                        ],
-                      ),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.star),
+                              const Expanded(
+                                child: Text('8.7/10 IMDb 3h 2min'),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: GenreListChipsWidget(
+                            movieItem: movie,
+                            backgroundColorChip:
+                                theme.primaryColor.withOpacity(0.1),
+                            fontColorChip: theme.primaryColor.withOpacity(0.45),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 )
