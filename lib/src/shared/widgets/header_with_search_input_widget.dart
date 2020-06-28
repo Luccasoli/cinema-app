@@ -8,12 +8,14 @@ class HeaderWithSearchInputWidget extends StatelessWidget {
   final bool isInputEnabled;
   final String initialValue;
   final void Function(String) onChanged;
+  final void Function() goBack;
 
   const HeaderWithSearchInputWidget({
     Key key,
     this.isInputEnabled = false,
     this.initialValue,
     this.onChanged,
+    this.goBack,
   }) : super(key: key);
 
   @override
@@ -62,9 +64,12 @@ class HeaderWithSearchInputWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: goBack ?? () {},
                         ),
                         const SizedBox(
                           width: 20,

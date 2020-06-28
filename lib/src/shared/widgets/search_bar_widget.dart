@@ -24,6 +24,7 @@ class SearchBarWidget extends StatelessWidget {
         color: Colors.white,
       ),
       child: TextFormField(
+        autofocus: true,
         enabled: enabled,
         initialValue: initialValue,
         onChanged: onChanged,

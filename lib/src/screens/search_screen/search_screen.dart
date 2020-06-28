@@ -37,6 +37,7 @@ class SearchScreen extends StatelessWidget {
                       isInputEnabled: true,
                       initialValue: searchInputController.search,
                       onChanged: searchInputController.onChanged,
+                      goBack: Get.back,
                     ),
                     Expanded(
                       child: Obx(
