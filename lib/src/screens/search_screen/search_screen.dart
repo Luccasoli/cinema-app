@@ -5,7 +5,6 @@ import 'package:cinema_app/src/screens/search_screen/widgets/movie_item_search_s
 import 'package:cinema_app/src/shared/widgets/background_animated_container.dart';
 import 'package:cinema_app/src/shared/widgets/header_with_search_input_widget.dart';
 import 'package:cinema_app/src/shared/widgets/status_bar_widget.dart';
-import 'package:cinema_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,16 +44,8 @@ class SearchScreen extends StatelessWidget {
                           controller:
                               scrollAnimationController.scrollController,
                           itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () => Get.toNamed(
-                                RoutesPath.movieDetails,
-                                arguments: {
-                                  'movie': searchMoviesController.items[index]
-                                },
-                              ),
-                              child: MovieItemSearchScreen(
-                                movie: searchMoviesController.items[index],
-                              ),
+                            return MovieItemSearchScreen(
+                              movie: searchMoviesController.items[index],
                             );
                           },
                           itemCount: searchMoviesController.items.length,
